@@ -6,14 +6,14 @@ import pl.maciejbadziak.voteitbackend.entity.Tag;
 import pl.maciejbadziak.voteitbackend.entity.User;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
 
 @Component
 @Data
 public class VoteitDto {
 
-    final private Set<Tag> tags = new HashSet<>();
+    private Long id;
+    private Set<Tag> tags;
     private String title;
     private String description;
     private String url;

@@ -1,8 +1,8 @@
 package pl.maciejbadziak.voteitbackend.entity;
 
 import lombok.Builder;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,13 +12,18 @@ import java.util.Set;
 
 @Entity(name = "Tag")
 @Table(name = "tag")
-@Builder
-@Data
+@Getter
 @EqualsAndHashCode(callSuper = true)
 public class Tag extends BaseEntity {
 
     @ManyToMany(mappedBy = "tags")
-    private Set<Voteit> voteits;
+    private final Set<Voteit> voteits;
     @Column(length = 20, nullable = false)
-    private String name;
+    private final String name;
+    @Builder
+    public Tag(Long id, String name, Set<Voteit> voteits) {
+        super(id);
+        this.name = name;
+        this.voteits = voteits;
+    }
 }

@@ -1,5 +1,6 @@
 package pl.maciejbadziak.voteitbackend.mapper;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,22 @@ import pl.maciejbadziak.voteitbackend.testdata.entity.TagTestData;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = TagMapperImpl.class)
-public class TagMapperTest {
+class TagMapperTest {
 
     @Autowired
     private TagMapper tagMapper;
 
     @Test
-    void should() {
+    void shouldMapToNullForNullTag() {
+        // given
+        // when
+        TagDto result = tagMapper.tagToTagDto(null);
+
+        // then
+        Assertions.assertNull(result);
+    }
+    @Test
+    void shouldMapTagToTagDto() {
         // given
         Tag tag = TagTestData.getPoliticsTag();
 
@@ -26,6 +36,7 @@ public class TagMapperTest {
         TagDto result = tagMapper.tagToTagDto(tag);
 
         // then
+        Assertions.assertEquals(tag.getId(), result.getId());
         TagDtoAssert.assertThat(result)
                 .hasName(tag.getName())
                 .hasVoteits(tag.getVoteits());

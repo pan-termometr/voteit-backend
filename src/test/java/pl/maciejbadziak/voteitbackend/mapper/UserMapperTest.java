@@ -1,5 +1,6 @@
 package pl.maciejbadziak.voteitbackend.mapper;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +19,26 @@ class UserMapperTest {
     private UserMapper userMapper;
 
     @Test
-    public void shouldMapUserToUserDto() {
+    void shouldMapToNullForNullUser() {
+        // given
+        // when
+        UserDto result = userMapper.userToUserDto(null);
+
+        // then
+        Assertions.assertNull(result);
+    }
+
+    @Test
+    void shouldMapUserToUserDto() {
         // given
         User user = UserTestData.getAdminUser();
 
         // when
-        UserDto userDto = userMapper.userToUserDto(user);
+        UserDto result = userMapper.userToUserDto(user);
 
         // then
-        UserDtoAssert.assertThat(userDto)
+        Assertions.assertEquals(user.getId(), result.getId());
+        UserDtoAssert.assertThat(result)
                 .hasUsername(user.getUsername())
                 .hasEmail(user.getEmail())
                 .hasOnlyVoteits(user.getVoteits());

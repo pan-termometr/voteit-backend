@@ -1,5 +1,6 @@
 package pl.maciejbadziak.voteitbackend.mapper;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,23 @@ import pl.maciejbadziak.voteitbackend.testdata.entity.VoteitTestData;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = VoteitMapperImpl.class)
-public class VoteitMapperTest {
+class VoteitMapperTest {
 
     @Autowired
     private VoteitMapper voteitMapper;
 
     @Test
-    void should() {
+    void shouldMapToNullForNullVoteit() {
+        // given
+        // when
+        VoteitDto result = voteitMapper.voteitToVoteitDto(null);
+
+        // then
+        Assertions.assertNull(result);
+    }
+
+    @Test
+    void shouldMapVoteitToVoteitDto() {
         // given
         Voteit voteit = VoteitTestData.getVoteitOnet();
 
@@ -26,6 +37,7 @@ public class VoteitMapperTest {
         VoteitDto result = voteitMapper.voteitToVoteitDto(voteit);
 
         // then
+        Assertions.assertEquals(voteit.getId(), result.getId());
         VoteitDtoAssert.assertThat(result)
                 .hasTitle(voteit.getTitle())
                 .hasDescription(voteit.getDescription())

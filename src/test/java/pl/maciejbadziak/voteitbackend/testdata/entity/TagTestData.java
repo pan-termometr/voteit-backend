@@ -8,6 +8,7 @@ public class TagTestData {
 
     public static Tag getPoliticsTag() {
         return Tag.builder()
+                .id(1L)
                 .name("politics")
                 .voteits(Set.of(VoteitTestData.getVoteitOnet()))
                 .build();

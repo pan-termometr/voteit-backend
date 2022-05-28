@@ -8,6 +8,7 @@ public class UserTestData {
 
     public static User getAdminUser() {
         return User.builder()
+                .id(1L)
                 .username("admin")
                 .password("password")
                 .email("admin@voteit.com")

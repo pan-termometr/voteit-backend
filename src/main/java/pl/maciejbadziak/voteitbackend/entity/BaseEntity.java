@@ -1,5 +1,6 @@
 package pl.maciejbadziak.voteitbackend.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -10,7 +11,8 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 @Data
-public abstract class BaseEntity {
+@AllArgsConstructor
+public class BaseEntity {
 
     @Id
     @GeneratedValue
