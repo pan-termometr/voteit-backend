@@ -1,5 +1,6 @@
 package pl.maciejbadziak.voteitbackend.dto;
 
+import lombok.Data;
 import org.springframework.stereotype.Component;
 import pl.maciejbadziak.voteitbackend.entity.Tag;
 import pl.maciejbadziak.voteitbackend.entity.User;
@@ -9,7 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Component
-public class VoteItDto {
+@Data
+public class VoteitDto {
 
     final private Set<Tag> tags = new HashSet<>();
     private String title;

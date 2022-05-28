@@ -1,13 +1,19 @@
 package pl.maciejbadziak.voteitbackend.entity;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "Voteit")
 @Table(name="voteit")
-public class Voteit extends CommonFields {
+@Data
+@Builder
+@EqualsAndHashCode(callSuper = true)
+public class Voteit extends BaseEntity {
 
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
@@ -18,7 +24,7 @@ public class Voteit extends CommonFields {
             joinColumns = { @JoinColumn(name = "tag_id") },
             inverseJoinColumns = { @JoinColumn(name = "voteit_id") }
     )
-    final private Set<Tag> tags = new HashSet<>();
+    private Set<Tag> tags;
     @Column(length=100, nullable=false)
     private String title;
     @Column(length=500, nullable=false)

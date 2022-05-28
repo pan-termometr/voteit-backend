@@ -1,20 +1,26 @@
 package pl.maciejbadziak.voteitbackend.entity;
 
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "User")
 @Table(name = "user")
-public class User extends CommonFields {
+@Builder
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "author", cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
-    final private Set<Voteit> voteitList = new HashSet<>();
+    private Set<Voteit> voteits;
     @Column(length=20, nullable=false)
-    private String user;
+    private String username;
     @Column(length=20, nullable=false)
     private String password;
     @Column(length=30, nullable=false)
