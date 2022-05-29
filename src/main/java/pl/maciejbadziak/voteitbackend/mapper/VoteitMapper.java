@@ -1,11 +1,16 @@
 package pl.maciejbadziak.voteitbackend.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 import pl.maciejbadziak.voteitbackend.dto.VoteitDto;
 import pl.maciejbadziak.voteitbackend.entity.Voteit;
 
-@Mapper(uses = {UserMapper.class, TagMapper.class})
-public abstract class VoteitMapper {
+import java.util.List;
 
-    public abstract VoteitDto voteitToVoteitDto(Voteit voteit);
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.WARN, uses = {UserMapper.class, TagMapper.class})
+public interface VoteitMapper {
+
+    VoteitDto voteitToVoteitDto(Voteit voteit);
+
+    List<VoteitDto> voteitsToVoteitDtos(Iterable<Voteit> voteit);
 }

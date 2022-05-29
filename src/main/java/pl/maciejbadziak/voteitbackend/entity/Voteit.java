@@ -1,48 +1,54 @@
 package pl.maciejbadziak.voteitbackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity(name = "Voteit")
-@Table(name="voteit")
+@Table(name = "voteits")
 @Getter
-@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class Voteit extends BaseEntity {
 
-    @ManyToMany(cascade = {
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
     @JoinTable(
-            name = "voteit_tag",
-            joinColumns = { @JoinColumn(name = "tag_id") },
-            inverseJoinColumns = { @JoinColumn(name = "voteit_id") }
+            name = "voteits_tags",
+            joinColumns = { @JoinColumn(name = "voteit_id") },
+            inverseJoinColumns = { @JoinColumn(name = "tag_id") }
     )
-    private final Set<Tag> tags;
+    @JsonManagedReference
+    private Set<Tag> tags = new HashSet<>();
     @Column(length=100, nullable=false)
-    private final String title;
+    private String title;
     @Column(length=500, nullable=false)
-    private final String description;
+    private String description;
     @Column(length=250, nullable=false)
-    private final String url;
+    private String url;
     @Column(length=250)
-    private final String picture;
+    private String picture;
     @Column(nullable=false)
-    private final int voteUp;
+    private int votesUp;
     @Column(nullable=false)
-    private final int voteDown;
+    private int votesDown;
     @Column(nullable=false)
-    private final boolean isForAdult;
+    private boolean isForAdult;
     @Column(nullable=false)
-    private final LocalDateTime creationDate;
+    private LocalDateTime creationDate;
     @ManyToOne
     @JoinColumn(name ="user_id", nullable = false)
-    private final User author;
+    private User author;
     @Builder
     public Voteit(
             long id,
@@ -51,8 +57,8 @@ public class Voteit extends BaseEntity {
             String description,
             String url,
             String picture,
-            int voteUp,
-            int voteDown,
+            int votesUp,
+            int votesDown,
             boolean isForAdult,
             LocalDateTime creationDate,
             User author) {
@@ -62,10 +68,24 @@ public class Voteit extends BaseEntity {
         this.description = description;
         this.url = url;
         this.picture = picture;
-        this.voteUp = voteUp;
-        this.voteDown = voteDown;
+        this.votesUp = votesUp;
+        this.votesDown = votesDown;
         this.isForAdult = isForAdult;
         this.creationDate = creationDate;
         this.author = author;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Voteit voteit = (Voteit) o;
+        return votesUp == voteit.votesUp && votesDown == voteit.votesDown && isForAdult == voteit.isForAdult && tags.equals(voteit.tags) && title.equals(voteit.title) && description.equals(voteit.description) && url.equals(voteit.url) && Objects.equals(picture, voteit.picture) && creationDate.equals(voteit.creationDate) && author.equals(voteit.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), tags, title, description, url, picture, votesUp, votesDown, isForAdult, creationDate, author);
     }
 }

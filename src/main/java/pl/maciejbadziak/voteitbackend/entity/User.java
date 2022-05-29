@@ -1,15 +1,17 @@
 package pl.maciejbadziak.voteitbackend.entity;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity(name = "User")
-@Table(name = "user")
+@Table(name = "users")
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class User extends BaseEntity {
 
@@ -17,13 +19,14 @@ public class User extends BaseEntity {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
-    private final Set<Voteit> voteits;
+    @JsonIgnore
+    private Set<Voteit> voteits = new HashSet<>();
     @Column(length=20, nullable=false)
-    private final String username;
+    private String username;
     @Column(length=20, nullable=false)
-    private final String password;
+    private String password;
     @Column(length=30, nullable=false)
-    private final String email;
+    private String email;
     @Builder
     public User(Long id, String username, String password, String email, Set<Voteit> voteits) {
         super(id);

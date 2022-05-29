@@ -4,8 +4,12 @@ import org.mapstruct.Mapper;
 import pl.maciejbadziak.voteitbackend.dto.TagDto;
 import pl.maciejbadziak.voteitbackend.entity.Tag;
 
-@Mapper(uses = {VoteitMapper.class})
-public abstract class TagMapper {
+import java.util.List;
 
-    public abstract TagDto tagToTagDto(Tag tag);
+@Mapper(uses = {VoteitMapper.class})
+public interface TagMapper {
+
+    TagDto tagToTagDto(Tag tag);
+
+    List<TagDto> tagsToTagDto(List<Tag> tagList);
 }
