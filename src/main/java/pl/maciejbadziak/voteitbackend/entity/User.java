@@ -1,10 +1,14 @@
 package pl.maciejbadziak.voteitbackend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity(name = "User")
@@ -12,14 +16,13 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "author", cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
-    @JsonIgnore
+    @JsonBackReference
     private Set<Voteit> voteits = new HashSet<>();
     @Column(length=20, nullable=false)
     private String username;
@@ -34,5 +37,19 @@ public class User extends BaseEntity {
         this.password = password;
         this.email = email;
         this.voteits = voteits;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        User user = (User) o;
+        return username.equals(user.username) && password.equals(user.password) && email.equals(user.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), username, password, email);
     }
 }

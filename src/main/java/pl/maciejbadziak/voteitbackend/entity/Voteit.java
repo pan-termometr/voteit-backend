@@ -48,6 +48,7 @@ public class Voteit extends BaseEntity {
     private LocalDateTime creationDate;
     @ManyToOne
     @JoinColumn(name ="user_id", nullable = false)
+    @JsonManagedReference
     private User author;
     @Builder
     public Voteit(
