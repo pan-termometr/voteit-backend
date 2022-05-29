@@ -1,6 +1,8 @@
 package pl.maciejbadziak.voteitbackend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,8 +19,9 @@ public class VoteitController {
     private VoteitService voteitService;
 
     @GetMapping(produces = "application/json")
-    public List<VoteitDto> getAllVoteits() {
-        return voteitService.getAll();
+    public ResponseEntity<List<VoteitDto>> getAllVoteits() {
+        List<VoteitDto> allVoteits = voteitService.getAll();
+        return new ResponseEntity<>(allVoteits, HttpStatus.OK);
     }
 
 }

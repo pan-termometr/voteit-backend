@@ -1,6 +1,8 @@
 package pl.maciejbadziak.voteitbackend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +19,8 @@ public class TagController {
     private TagService tagService;
 
     @GetMapping(produces = "application/json")
-    public List<TagDto> getAllTags() {
-        return tagService.getAll();
+    public ResponseEntity<List<TagDto>> getAllTags() {
+        List<TagDto> allTags = tagService.getAll();
+        return new ResponseEntity<>(allTags, HttpStatus.OK);
     }
 }
