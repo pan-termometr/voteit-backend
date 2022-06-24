@@ -1,15 +1,21 @@
 package pl.maciejbadziak.voteitbackend.mapper;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import pl.maciejbadziak.voteitbackend.dto.UserDto;
-import pl.maciejbadziak.voteitbackend.dto.UserDtoAssert;
 import pl.maciejbadziak.voteitbackend.entity.User;
-import pl.maciejbadziak.voteitbackend.testdata.entity.UserTestData;
+
+import java.util.List;
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static pl.maciejbadziak.voteitbackend.asserts.UserDtoAssert.assertThat;
+import static pl.maciejbadziak.voteitbackend.testdata.entity.UserTestData.getAdminUser;
+import static pl.maciejbadziak.voteitbackend.testdata.entity.UserTestData.getRandomUser;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = UserMapperImpl.class)
@@ -25,22 +31,44 @@ class UserMapperTest {
         UserDto result = userMapper.userToUserDto(null);
 
         // then
-        Assertions.assertNull(result);
+        assertNull(result);
     }
 
     @Test
     void shouldMapUserToUserDto() {
         // given
-        User user = UserTestData.getAdminUser();
+        User user = getAdminUser();
 
         // when
         UserDto result = userMapper.userToUserDto(user);
 
         // then
-        Assertions.assertEquals(user.getId(), result.getId());
-        UserDtoAssert.assertThat(result)
+        assertEquals(user.getId(), result.getId());
+        assertThat(result)
+                .hasId(user.getId())
                 .hasUsername(user.getUsername())
-                .hasEmail(user.getEmail())
-                .hasOnlyVoteits(user.getVoteits());
+                .hasEmail(user.getEmail());
+    }
+
+    @Test
+    void shouldMapToNullForNullUsers() {
+        // given
+        // when
+        List<UserDto> result = userMapper.usersToUserDtos(null);
+
+        // then
+        assertNull(result);
+    }
+
+    @Test
+    void shouldMapUsersToUserDtos() {
+        // given
+        Set<User> users = Set.of(getAdminUser(), getRandomUser());
+
+        // when
+        List<UserDto> result = userMapper.usersToUserDtos(users);
+
+        // then
+        assertEquals(2, result.size());
     }
 }

@@ -12,5 +12,5 @@ public interface TagMapper {
 
     TagDto tagToTagDto(Tag tag);
 
-    List<TagDto> tagsToTagDto(Iterable<Tag> tagList);
+    List<TagDto> tagsToTagDtos(Iterable<Tag> tagList);
 }

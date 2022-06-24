@@ -1,10 +1,14 @@
 package pl.maciejbadziak.voteitbackend.dto;
 
-import lombok.Data;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 @Component
-@Data
+@Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TagDto {
 
     private Long id;

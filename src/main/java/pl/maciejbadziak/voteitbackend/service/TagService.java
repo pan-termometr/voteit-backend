@@ -18,6 +18,6 @@ public class TagService {
     private TagMapper tagMapper;
 
     public List<TagDto> getAll() {
-        return tagMapper.tagsToTagDto(tagRepository.findAll());
+        return tagMapper.tagsToTagDtos(tagRepository.findAll());
     }
 }

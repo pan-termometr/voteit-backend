@@ -2,8 +2,6 @@ package pl.maciejbadziak.voteitbackend.testdata.entity;
 
 import pl.maciejbadziak.voteitbackend.entity.User;
 
-import java.util.Set;
-
 public class UserTestData {
 
     public static User getAdminUser() {
@@ -12,7 +10,15 @@ public class UserTestData {
                 .username("admin")
                 .password("password")
                 .email("admin@voteit.com")
-                .voteits(Set.of(VoteitTestData.getVoteitOnet()))
+                .build();
+    }
+
+    public static User getRandomUser() {
+        return User.builder()
+                .id(2L)
+                .username("random")
+                .password("random-pass")
+                .email("random@voteit.com")
                 .build();
     }
 }

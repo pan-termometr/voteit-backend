@@ -1,21 +1,17 @@
-package pl.maciejbadziak.voteitbackend.testdata.entity;
+package pl.maciejbadziak.voteitbackend.testdata.dto;
 
-import pl.maciejbadziak.voteitbackend.entity.Voteit;
+import pl.maciejbadziak.voteitbackend.dto.VoteitDto;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
-import static pl.maciejbadziak.voteitbackend.testdata.entity.TagTestData.getPoliticsTag;
-import static pl.maciejbadziak.voteitbackend.testdata.entity.TagTestData.getTravelTag;
 import static pl.maciejbadziak.voteitbackend.testdata.entity.UserTestData.getAdminUser;
 import static pl.maciejbadziak.voteitbackend.testdata.entity.UserTestData.getRandomUser;
 
-public class VoteitTestData {
+public class VoteitDtoTestData {
 
-    public static Voteit getOnetVoteit() {
-        return Voteit.builder()
+    public static VoteitDto getOnetVoteitDto() {
+        return VoteitDto.builder()
                 .id(1L)
-                .tags(Set.of(getPoliticsTag()))
                 .title("Onet")
                 .description("News from Poland")
                 .url("https://onet.pl")
@@ -28,10 +24,9 @@ public class VoteitTestData {
                 .build();
     }
 
-    public static Voteit getAdsVoteit() {
-        return Voteit.builder()
+    public static VoteitDto getAdsVoteitDto() {
+        return VoteitDto.builder()
                 .id(2L)
-                .tags(Set.of(getPoliticsTag(), getTravelTag()))
                 .title("Autostopem Dookoła Świata")
                 .description("Blog podróżniczy")
                 .url("https://autostopemdookolaswiata.pl")
