@@ -49,7 +49,7 @@ class VoteitMapperTest {
                 .hasTitle(voteit.getTitle())
                 .hasDescription(voteit.getDescription())
                 .hasUrl(voteit.getUrl())
-                .hasPicture(voteit.getPicture())
+                .hasThumbnail(voteit.getThumbnail())
                 .hasVotesUp(voteit.getVotesUp())
                 .hasVotesDown(voteit.getVotesDown())
                 .isForAdult(voteit.isForAdult())

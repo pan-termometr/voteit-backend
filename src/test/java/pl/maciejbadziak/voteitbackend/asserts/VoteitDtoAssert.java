@@ -67,12 +67,12 @@ public class VoteitDtoAssert extends AbstractAssert<VoteitDtoAssert, VoteitDto> 
         return this;
     }
 
-    public VoteitDtoAssert hasPicture(String picture) {
+    public VoteitDtoAssert hasThumbnail(String thumbnail) {
         isNotNull();
-        if (!actual.getPicture().equals(picture)) {
-            failWithMessage("Expected voteit to have picture %s but was %s.",
-                    picture,
-                    actual.getPicture());
+        if (!actual.getThumbnail().equals(thumbnail)) {
+            failWithMessage("Expected voteit to have thumbnail %s but was %s.",
+                    thumbnail,
+                    actual.getThumbnail());
         }
         return this;
     }

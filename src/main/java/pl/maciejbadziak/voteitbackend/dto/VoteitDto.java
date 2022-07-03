@@ -21,7 +21,7 @@ public class VoteitDto {
     private String title;
     private String description;
     private String url;
-    private String picture;
+    private String thumbnail;
     private int votesUp;
     private int votesDown;
     private boolean isForAdult;

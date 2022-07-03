@@ -37,7 +37,7 @@ public class Voteit extends BaseEntity {
     @Column(length=250, nullable=false)
     private String url;
     @Column(length=250)
-    private String picture;
+    private String thumbnail;
     @Column(nullable=false)
     private int votesUp;
     @Column(nullable=false)
@@ -57,7 +57,7 @@ public class Voteit extends BaseEntity {
             String title,
             String description,
             String url,
-            String picture,
+            String thumbnail,
             int votesUp,
             int votesDown,
             boolean isForAdult,
@@ -68,7 +68,7 @@ public class Voteit extends BaseEntity {
         this.title = title;
         this.description = description;
         this.url = url;
-        this.picture = picture;
+        this.thumbnail = thumbnail;
         this.votesUp = votesUp;
         this.votesDown = votesDown;
         this.isForAdult = isForAdult;
@@ -82,11 +82,11 @@ public class Voteit extends BaseEntity {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Voteit voteit = (Voteit) o;
-        return votesUp == voteit.votesUp && votesDown == voteit.votesDown && isForAdult == voteit.isForAdult && tags.equals(voteit.tags) && title.equals(voteit.title) && description.equals(voteit.description) && url.equals(voteit.url) && Objects.equals(picture, voteit.picture) && creationDate.equals(voteit.creationDate) && author.equals(voteit.author);
+        return votesUp == voteit.votesUp && votesDown == voteit.votesDown && isForAdult == voteit.isForAdult && tags.equals(voteit.tags) && title.equals(voteit.title) && description.equals(voteit.description) && url.equals(voteit.url) && Objects.equals(thumbnail, voteit.thumbnail) && creationDate.equals(voteit.creationDate) && author.equals(voteit.author);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), tags, title, description, url, picture, votesUp, votesDown, isForAdult, creationDate, author);
+        return Objects.hash(super.hashCode(), tags, title, description, url, thumbnail, votesUp, votesDown, isForAdult, creationDate, author);
     }
 }
