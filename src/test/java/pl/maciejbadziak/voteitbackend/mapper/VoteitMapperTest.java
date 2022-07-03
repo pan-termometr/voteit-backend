@@ -18,7 +18,7 @@ import static pl.maciejbadziak.voteitbackend.testdata.entity.VoteitTestData.getA
 import static pl.maciejbadziak.voteitbackend.testdata.entity.VoteitTestData.getOnetVoteit;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = VoteitMapperImpl.class)
+@ContextConfiguration(classes = {VoteitMapperImpl.class, TagMapperImpl.class})
 class VoteitMapperTest {
 
     @Autowired
@@ -54,7 +54,7 @@ class VoteitMapperTest {
                 .hasVotesDown(voteit.getVotesDown())
                 .isForAdult(voteit.isForAdult())
                 .hasCreationDate(voteit.getCreationDate())
-                .hasAuthor(voteit.getAuthor().getId());
+                .hasAuthor(voteit.getAuthor().getUsername());
     }
 
     @Test

@@ -13,4 +13,9 @@ public interface TagMapper {
     TagDto tagToTagDto(Tag tag);
 
     List<TagDto> tagsToTagDtos(Iterable<Tag> tagList);
+
+    default String tagToTagname(Tag tag) {
+        return tag.getName();
+    }
+
 }

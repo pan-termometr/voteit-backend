@@ -4,9 +4,6 @@ import pl.maciejbadziak.voteitbackend.dto.VoteitDto;
 
 import java.time.LocalDateTime;
 
-import static pl.maciejbadziak.voteitbackend.testdata.entity.UserTestData.getAdminUser;
-import static pl.maciejbadziak.voteitbackend.testdata.entity.UserTestData.getRandomUser;
-
 public class VoteitDtoTestData {
 
     public static VoteitDto getOnetVoteitDto() {
@@ -19,7 +16,7 @@ public class VoteitDtoTestData {
                 .votesUp(900)
                 .votesDown(13)
                 .isForAdult(false)
-                .author(getRandomUser())
+                .author("random")
                 .creationDate(LocalDateTime.now())
                 .build();
     }
@@ -34,7 +31,7 @@ public class VoteitDtoTestData {
                 .votesUp(1000)
                 .votesDown(0)
                 .isForAdult(false)
-                .author(getAdminUser())
+                .author("admin")
                 .creationDate(LocalDateTime.now())
                 .build();
     }

@@ -2,8 +2,6 @@ package pl.maciejbadziak.voteitbackend.dto;
 
 import lombok.*;
 import org.springframework.stereotype.Component;
-import pl.maciejbadziak.voteitbackend.entity.Tag;
-import pl.maciejbadziak.voteitbackend.entity.User;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -17,7 +15,7 @@ import java.util.Set;
 public class VoteitDto {
 
     private Long id;
-    private Set<Tag> tags;
+    private Set<String> tags;
     private String title;
     private String description;
     private String url;
@@ -26,5 +24,5 @@ public class VoteitDto {
     private int votesDown;
     private boolean isForAdult;
     private LocalDateTime creationDate;
-    private User author;
+    private String author;
 }

@@ -117,13 +117,13 @@ public class VoteitDtoAssert extends AbstractAssert<VoteitDtoAssert, VoteitDto> 
         return this;
     }
 
-    public VoteitDtoAssert hasAuthor(Long id) {
+    public VoteitDtoAssert hasAuthor(String author) {
         isNotNull();
-        Long authorId = actual.getAuthor().getId();
-        if (!authorId.equals(id)) {
+        String username = actual.getAuthor();
+        if (!username.equals(author)) {
             failWithMessage("Expected voteit to have author id %s but was %s.",
-                    id,
-                    actual.getAuthor().getId());
+                    author,
+                    actual.getAuthor());
         }
         return this;
     }
