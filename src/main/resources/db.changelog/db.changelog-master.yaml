@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: changelog-user-structure
+      author: termometr
+      changes:
+        sqlFile:
+          path: db.changelog/setup-scripts/changelog-user-structure.sql
+          relativeToChangelogFile: true
+  - changeSet:
+      id: changelog-tag-structure
+      author: termometr
+      changes:
+        sqlFile:
+          path: db.changelog/setup-scripts/changelog-tag-structure.sql
+          relativeToChangelogFile: true
+  - changeSet:
+      id: changelog-voteit-structure
+      author: termometr
+      changes:
+        sqlFile:
+          path: db.changelog/setup-scripts/changelog-voteit-structure.sql
+          relativeToChangelogFile: true
+  - changeSet:
+      id: changelog-voteit-tag-x-structure
+      author: termometr
+      changes:
+        sqlFile:
+          path: db.changelog/setup-scripts/changelog-voteit-tag-x-structure.sql
+          relativeToChangelogFile: true
