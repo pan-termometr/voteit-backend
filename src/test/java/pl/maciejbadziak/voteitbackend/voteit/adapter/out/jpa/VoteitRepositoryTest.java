@@ -3,7 +3,7 @@ package pl.maciejbadziak.voteitbackend.voteit.adapter.out.jpa;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import pl.maciejbadziak.voteitbackend.IntegrationTests;
+import pl.maciejbadziak.voteitbackend.IntegrationTest;
 import pl.maciejbadziak.voteitbackend.tag.adapter.out.jpa.TagEntity;
 import pl.maciejbadziak.voteitbackend.tag.adapter.out.jpa.TagRepository;
 import pl.maciejbadziak.voteitbackend.user.adapter.out.jpa.UserEntity;
@@ -19,7 +19,7 @@ import static pl.maciejbadziak.voteitbackend.user.testdata.UserEntityTestData.te
 import static pl.maciejbadziak.voteitbackend.voteit.testdata.VoteitEntityTestData.adsVoteitEntity;
 import static pl.maciejbadziak.voteitbackend.voteit.testdata.VoteitEntityTestData.onetVoteitEntity;
 
-class VoteitRepositoryTest extends IntegrationTests {
+class VoteitRepositoryTest extends IntegrationTest {
 
     @Autowired
     private transient UserRepository userRepository;
