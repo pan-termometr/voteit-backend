@@ -2,9 +2,12 @@ package pl.maciejbadziak.voteitbackend.voteit.adapter.in.rest;
 
 import org.junit.jupiter.api.Test;
 import pl.maciejbadziak.voteitbackend.voteit.adapter.in.rest.resources.VoteitResource;
+import pl.maciejbadziak.voteitbackend.voteit.domain.Tag;
 import pl.maciejbadziak.voteitbackend.voteit.domain.Voteit;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import static java.util.List.of;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,6 +25,7 @@ class VoteitResourceAssemblerTest {
         final VoteitResource result = new VoteitResourceAssembler().assemble(voteit);
 
         // then
+        assertThat(voteit.getThumbnail()).isNotNull();
         assertThat(result).extracting(
                 VoteitResource::getId,
                 VoteitResource::getTitle,
@@ -45,8 +49,15 @@ class VoteitResourceAssemblerTest {
                 voteit.getCreator().getValue(),
                 voteit.getCreationDate().getValue()
         );
-        assertThat(result.getTags())
-                .contains(voteit.getTags().stream().findAny().get().getValue());
+        assertTags(result.getTags(), voteit.getTags());
+    }
+
+    private void assertTags(Set<String> resultTags, Set<Tag> expectedTags) {
+        final Optional<Tag> expectedTag = expectedTags.stream().findAny();
+
+        assertThat(expectedTag).isPresent();
+        assertThat(resultTags)
+                .contains(expectedTag.get().getValue());
     }
 
     @Test
@@ -59,5 +70,15 @@ class VoteitResourceAssemblerTest {
 
         // then
         assertThat(result).hasSameSizeAs(voteits);
+    }
+
+    @Test
+    void shouldReturnNullForNullableVoteit() {
+        // given
+        // when
+        final VoteitResource result = new VoteitResourceAssembler().assemble((Voteit) null);
+
+        // then
+        assertThat(result).isNull();
     }
 }

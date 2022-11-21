@@ -3,6 +3,8 @@ package pl.maciejbadziak.voteitbackend.user.adapter.in.rest.resources;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 
 @Getter
@@ -15,4 +17,5 @@ public class UserResource {
 
     private final String username;
     private final String email;
+    private final LocalDateTime registrationDate;
 }

@@ -1,4 +1,4 @@
-package pl.maciejbadziak.voteitbackend.voteit.domain;
+package pl.maciejbadziak.voteitbackend.user.domain;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -9,19 +9,19 @@ import java.util.regex.Pattern;
 
 @Value
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class Creator {
+public class Username {
 
-    private static final Pattern CREATOR_PATTERN = Pattern.compile("^(?=.{1,30}$)(?![_.])(?!.*[_.]{2})[a-z0-9._]+(?<![_.])$");
+    private static final Pattern USERNAME_PATTERN = Pattern.compile("^(?=.{1,30}$)(?![_.])(?!.*[_.]{2})[a-z0-9._]+(?<![_.])$");
 
     String value;
 
-    public static Creator of(final String value) {
+    public static Username of(final String value) {
         validate(value);
-        return new Creator(value);
+        return new Username(value);
     }
 
     private static void validate(final String value) {
-        if (!CREATOR_PATTERN.matcher(value).matches()) {
+        if (!USERNAME_PATTERN.matcher(value).matches()) {
             throw new InvalidCreator(value);
         }
     }

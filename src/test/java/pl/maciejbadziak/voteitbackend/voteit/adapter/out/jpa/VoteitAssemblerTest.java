@@ -1,8 +1,12 @@
 package pl.maciejbadziak.voteitbackend.voteit.adapter.out.jpa;
 
 import org.junit.jupiter.api.Test;
+import pl.maciejbadziak.voteitbackend.tag.adapter.out.jpa.TagEntity;
 import pl.maciejbadziak.voteitbackend.voteit.domain.Tag;
 import pl.maciejbadziak.voteitbackend.voteit.domain.Voteit;
+
+import java.util.Optional;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static pl.maciejbadziak.voteitbackend.voteit.testdata.VoteitEntityTestData.onetVoteitEntity;
@@ -18,6 +22,7 @@ class VoteitAssemblerTest {
         final Voteit result = new VoteitAssembler().assemble(voteitEntity);
 
         // then
+        assertThat(result.getThumbnail()).isNotNull();
         assertThat(result).extracting(
                 voteit -> result.getId().getValue(),
                 voteit -> result.getTitle().getValue(),
@@ -41,10 +46,27 @@ class VoteitAssemblerTest {
                 voteitEntity.getCreator().getUsername(),
                 voteitEntity.getCreationDate()
         );
-        assertThat(result.getTags()).extracting(
+        assertTags(result.getTags(), voteitEntity.getTags());
+    }
+
+    @Test
+    void shouldReturnNullForNullableEntity() {
+        // given
+        // when
+        final Voteit result = new VoteitAssembler().assemble((VoteitEntity) null);
+
+        // then
+        assertThat(result).isNull();
+    }
+
+    private void assertTags(final Set<Tag> resultTags, final Set<TagEntity> expectedTags) {
+        final Optional<TagEntity> expectedTagEntity = expectedTags.stream().findAny();
+
+        assertThat(expectedTagEntity).isPresent();
+        assertThat(resultTags).extracting(
                 Tag::getValue
         ).contains(
-                voteitEntity.getTags().stream().findFirst().get().getName()
+                expectedTagEntity.get().getName()
         );
     }
 }
