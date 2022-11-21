@@ -27,3 +27,10 @@ databaseChangeLog:
         sqlFile:
           path: db.changelog/setup-scripts/changelog-voteit-tag-x-structure.sql
           relativeToChangelogFile: true
+  - changeSet:
+      id: changelog-add-registration-date-column-to-user-table
+      author: termometr
+      changes:
+        sqlFile:
+          path: db.changelog/setup-scripts/changelog-add-registration-date-column-to-user-table.sql
+          relativeToChangelogFile: true
