@@ -14,6 +14,7 @@ class ThumbnailTest {
     private static final String VALID_THUMBNAIL_URL = "https://valid-thumbnail.com";
     private static final String VALID_THUMBNAIL_PATH = "/voteit-1.jpg";
     private static final String VALID_EMPTY_THUMBNAIL = "";
+    private static final String EXCEPTION_MESSAGE = "Thumbnail [%s] is not valid";
     private static final int HTTPS_LENGTH = 8;
     private static final int PL_LENGTH = 3;
     private static final int MAX_LENGTH = 2048 - HTTPS_LENGTH - PL_LENGTH;
@@ -59,6 +60,6 @@ class ThumbnailTest {
         // then
         assertThat(result)
                 .isInstanceOf(InvalidThumbnail.class)
-                .hasMessage("Thumbnail [%s] is not valid", INVALID_TOO_LONG_THUMBNAIL);
+                .hasMessage(EXCEPTION_MESSAGE, INVALID_TOO_LONG_THUMBNAIL);
     }
 }

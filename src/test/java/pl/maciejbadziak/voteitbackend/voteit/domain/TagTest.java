@@ -14,8 +14,9 @@ class TagTest {
     private static final String VALID_TAG = "validtag";
     private static final String INVALID_TAG_WITH_CAPITAL_LETTER = "Invalidtag";
     private static final String INVALID_EMPTY_TAG = "";
-    private static final int MAX_LENGTH = 30;
     private static final String INVALID_TOO_LONG_TAG = generateTooLongTag();
+    private static final String EXCEPTION_MESSAGE = "Tag [%s] is not valid";
+    private static final int MAX_LENGTH = 30;
 
     private static String generateTooLongTag() {
         return IntStream.range(0, MAX_LENGTH + 1)
@@ -40,7 +41,7 @@ class TagTest {
         // then
         assertThat(result)
                 .isInstanceOf(InvalidTag.class)
-                .hasMessage("Tag [%s] is not valid", INVALID_TAG_WITH_CAPITAL_LETTER);
+                .hasMessage(EXCEPTION_MESSAGE, INVALID_TAG_WITH_CAPITAL_LETTER);
     }
 
     @Test
@@ -52,7 +53,7 @@ class TagTest {
         // then
         assertThat(result)
                 .isInstanceOf(InvalidTag.class)
-                .hasMessage("Tag [%s] is not valid", INVALID_TOO_LONG_TAG);
+                .hasMessage(EXCEPTION_MESSAGE, INVALID_TOO_LONG_TAG);
     }
 
     @Test
@@ -64,6 +65,6 @@ class TagTest {
         // then
         assertThat(result)
                 .isInstanceOf(InvalidTag.class)
-                .hasMessage("Tag [%s] is not valid", INVALID_EMPTY_TAG);
+                .hasMessage(EXCEPTION_MESSAGE, INVALID_EMPTY_TAG);
     }
 }

@@ -3,16 +3,16 @@ package pl.maciejbadziak.voteitbackend.user.usecase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.maciejbadziak.voteitbackend.user.domain.User;
-import pl.maciejbadziak.voteitbackend.user.port.FindByUsernamePort;
+import pl.maciejbadziak.voteitbackend.user.port.FindUserByUsernamePort;
 
 @Component
 @RequiredArgsConstructor
-public class FindByUsernameUseCase {
+public class FindUserByUsernameUseCase {
 
-    private final FindByUsernamePort findByUsernamePort;
+    private final FindUserByUsernamePort findUserByUsernamePort;
 
     public User find(final String username) {
-        return findByUsernamePort.findByUsername(username);
+        return findUserByUsernamePort.findByUsername(username);
     }
 
 

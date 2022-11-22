@@ -7,7 +7,7 @@ import java.util.Set;
 
 import static pl.maciejbadziak.voteitbackend.tag.testdata.TagEntityTestData.newsTag;
 import static pl.maciejbadziak.voteitbackend.tag.testdata.TagEntityTestData.travelTag;
-import static pl.maciejbadziak.voteitbackend.user.testdata.UserEntityTestData.termometrUser;
+import static pl.maciejbadziak.voteitbackend.user.testdata.UserEntityTestData.termometrUserEntity;
 
 public class VoteitEntityTestData {
 
@@ -22,7 +22,7 @@ public class VoteitEntityTestData {
                 .votesDown(13)
                 .tags(Set.of(newsTag()))
                 .isForAdultOnly(false)
-                .creator(termometrUser())
+                .creator(termometrUserEntity())
                 .creationDate(LocalDateTime.of(2022, 11, 11, 13, 13, 13))
                 .build();
     }
@@ -38,7 +38,7 @@ public class VoteitEntityTestData {
                 .votesDown(0)
                 .tags(Set.of(travelTag()))
                 .isForAdultOnly(false)
-                .creator(termometrUser())
+                .creator(termometrUserEntity())
                 .creationDate(LocalDateTime.of(2022, 11, 11, 13, 13, 13))
                 .build();
     }

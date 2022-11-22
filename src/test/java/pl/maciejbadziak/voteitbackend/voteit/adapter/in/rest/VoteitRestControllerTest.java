@@ -23,10 +23,10 @@ import static pl.maciejbadziak.voteitbackend.voteit.testdata.VoteitTestData.onet
 class VoteitRestControllerTest {
 
     @Mock
-    private transient VoteitResourceAssembler voteitResourceAssembler;
+    private transient FindAllVoteitsUseCase findAllVoteitsUseCaseMock;
 
     @Mock
-    private transient FindAllVoteitsUseCase findAllVoteitsUseCase;
+    private transient VoteitResourceAssembler voteitResourceAssemblerMock;
 
     @InjectMocks
     private transient VoteitRestController voteitRestController;
@@ -37,15 +37,15 @@ class VoteitRestControllerTest {
         final List<Voteit> voteits = of(onetVoteit(), adsVoteit());
         final List<VoteitResource> voteitResources = of(onetVoteitResource(), adsVoteitResource());
 
-        when(findAllVoteitsUseCase.allVoteits()).thenReturn(voteits);
-        when(voteitResourceAssembler.assemble(voteits)).thenReturn(voteitResources);
+        when(findAllVoteitsUseCaseMock.allVoteits()).thenReturn(voteits);
+        when(voteitResourceAssemblerMock.assemble(voteits)).thenReturn(voteitResources);
 
         // when
         final List<VoteitResource> result = voteitRestController.allVoteits();
 
         // then
         assertThat(result).isEqualTo(voteitResources);
-        verify(findAllVoteitsUseCase, times(1)).allVoteits();
-        verify(voteitResourceAssembler, times(1)).assemble(voteits);
+        verify(findAllVoteitsUseCaseMock, times(1)).allVoteits();
+        verify(voteitResourceAssemblerMock, times(1)).assemble(voteits);
     }
 }

@@ -1,5 +1,6 @@
 package pl.maciejbadziak.voteitbackend.voteit.adapter.in.rest;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,7 +19,7 @@ import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static pl.maciejbadziak.voteitbackend.tag.testdata.TagEntityTestData.newsTag;
-import static pl.maciejbadziak.voteitbackend.user.testdata.UserEntityTestData.termometrUser;
+import static pl.maciejbadziak.voteitbackend.user.testdata.UserEntityTestData.termometrUserEntity;
 import static pl.maciejbadziak.voteitbackend.voteit.testdata.VoteitEntityTestData.onetVoteitEntity;
 
 @AutoConfigureMockMvc
@@ -36,12 +37,19 @@ class VoteitRestControllerIntegrationTest extends IntegrationTest {
     @Autowired
     private transient VoteitRepository voteitRepository;
 
+    @BeforeEach
+    public void init() {
+        userRepository.deleteAll();
+        tagRepository.deleteAll();
+        voteitRepository.deleteAll();
+    }
+
     @Test
     void shouldProvideVoteits() throws Exception {
         // given
         final VoteitEntity voteitEntity = onetVoteitEntity();
         final TagEntity tagEntity = newsTag();
-        final UserEntity userEntity = termometrUser();
+        final UserEntity userEntity = termometrUserEntity();
 
         userRepository.save(userEntity);
         tagRepository.save(tagEntity);
