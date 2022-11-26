@@ -3,7 +3,7 @@ package pl.maciejbadziak.voteitbackend.user.domain;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Value;
-import pl.maciejbadziak.voteitbackend.user.domain.error.InvalidEmail;
+import pl.maciejbadziak.voteitbackend.user.domain.error.InvalidEmailException;
 
 import java.util.regex.Pattern;
 
@@ -21,7 +21,7 @@ public class Email {
 
     private static void validate(final String value) {
         if (!EMAIL_PATTERN.matcher(value).matches() || !containsDotInDomain(value)) {
-            throw new InvalidEmail(value);
+            throw new InvalidEmailException(value);
         }
     }
 

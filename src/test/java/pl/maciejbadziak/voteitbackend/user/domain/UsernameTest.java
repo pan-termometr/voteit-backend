@@ -1,7 +1,7 @@
 package pl.maciejbadziak.voteitbackend.user.domain;
 
 import org.junit.jupiter.api.Test;
-import pl.maciejbadziak.voteitbackend.user.domain.error.InvalidUsername;
+import pl.maciejbadziak.voteitbackend.user.domain.error.InvalidUsernameException;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -40,7 +40,7 @@ class UsernameTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidUsername.class)
+                .isInstanceOf(InvalidUsernameException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_USERNAME_WITH_CAPITAL_LETTER);
     }
 
@@ -52,7 +52,7 @@ class UsernameTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidUsername.class)
+                .isInstanceOf(InvalidUsernameException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_TOO_LONG_USERNAME);
     }
 
@@ -64,7 +64,7 @@ class UsernameTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidUsername.class)
+                .isInstanceOf(InvalidUsernameException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_EMPTY_USERNAME);
     }
 }

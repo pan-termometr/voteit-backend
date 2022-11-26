@@ -1,7 +1,7 @@
 package pl.maciejbadziak.voteitbackend.user.domain;
 
 import org.junit.jupiter.api.Test;
-import pl.maciejbadziak.voteitbackend.user.domain.error.InvalidEmail;
+import pl.maciejbadziak.voteitbackend.user.domain.error.InvalidEmailException;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -44,7 +44,7 @@ class EmailTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidEmail.class)
+                .isInstanceOf(InvalidEmailException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_EMAIL_WITHOUT_AT);
     }
 
@@ -56,7 +56,7 @@ class EmailTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidEmail.class)
+                .isInstanceOf(InvalidEmailException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_EMAIL_WITHOUT_DOT);
     }
 
@@ -68,7 +68,7 @@ class EmailTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidEmail.class)
+                .isInstanceOf(InvalidEmailException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_TOO_SHORT_EMAIL);
     }
 
@@ -80,7 +80,7 @@ class EmailTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidEmail.class)
+                .isInstanceOf(InvalidEmailException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_TOO_LONG_EMAIL);
     }
 }
