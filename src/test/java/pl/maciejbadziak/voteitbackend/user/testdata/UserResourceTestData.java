@@ -1,26 +1,22 @@
 package pl.maciejbadziak.voteitbackend.user.testdata;
 
-import pl.maciejbadziak.voteitbackend.user.adapter.out.jpa.UserEntity;
+import pl.maciejbadziak.voteitbackend.user.adapter.in.rest.resources.UserResource;
 
 import java.time.LocalDateTime;
 
-public class UserEntityTestData {
+public class UserResourceTestData {
 
-    public static UserEntity termometrUserEntity() {
-        return UserEntity.builder()
-                .id(1L)
+    public static UserResource termometrUserResource() {
+        return UserResource.builder()
                 .username("termometr")
-                .password("password")
                 .email("termometr@voteit.com")
                 .registrationDate(LocalDateTime.of(2022, 11, 11, 13, 13, 13))
                 .build();
     }
 
-    public static UserEntity testUserEntity() {
-        return UserEntity.builder()
-                .id(2L)
+    public static UserResource testUserResource() {
+        return UserResource.builder()
                 .username("test")
-                .password("password")
                 .email("test@voteit.com")
                 .registrationDate(LocalDateTime.of(2022, 11, 11, 13, 13, 13))
                 .build();

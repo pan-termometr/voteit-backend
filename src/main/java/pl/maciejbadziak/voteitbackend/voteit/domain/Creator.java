@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Creator {
 
-    private static final Pattern AUTHOR_PATTERN = Pattern.compile("^(?=.{1,30}$)(?![_.])(?!.*[_.]{2})[a-z0-9._]+(?<![_.])$");
+    private static final Pattern CREATOR_PATTERN = Pattern.compile("^(?=.{1,30}$)(?![_.])(?!.*[_.]{2})[a-z\\d._]+(?<![_.])$");
 
     String value;
 
@@ -21,7 +21,7 @@ public class Creator {
     }
 
     private static void validate(final String value) {
-        if (!AUTHOR_PATTERN.matcher(value).matches()) {
+        if (!CREATOR_PATTERN.matcher(value).matches()) {
             throw new InvalidCreator(value);
         }
     }

@@ -21,10 +21,10 @@ import static pl.maciejbadziak.voteitbackend.voteit.testdata.VoteitTestData.onet
 class VoteitJpaAdapterTest {
 
     @Mock
-    private transient VoteitRepository voteitRepository;
+    private transient VoteitRepository voteitRepositoryMock;
 
     @Mock
-    private transient VoteitAssembler voteitAssembler;
+    private transient VoteitAssembler voteitAssemblerMock;
 
     @InjectMocks
     private transient VoteitJpaAdapter voteitJpaAdapter;
@@ -35,15 +35,15 @@ class VoteitJpaAdapterTest {
         final List<VoteitEntity> givenVoteits = of(onetVoteitEntity(), adsVoteitEntity());
         final List<Voteit> expectedVoteits = of(onetVoteit(), adsVoteit());
 
-        when(voteitRepository.findAll()).thenReturn(givenVoteits);
-        when(voteitAssembler.assemble(givenVoteits)).thenReturn(expectedVoteits);
+        when(voteitRepositoryMock.findAll()).thenReturn(givenVoteits);
+        when(voteitAssemblerMock.assemble(givenVoteits)).thenReturn(expectedVoteits);
 
         // when
         final List<Voteit> result = voteitJpaAdapter.findAll();
 
         // then
         assertThat(result).isEqualTo(expectedVoteits);
-        verify(voteitRepository, times(1)).findAll();
-        verify(voteitAssembler, times(1)).assemble(givenVoteits);
+        verify(voteitRepositoryMock, times(1)).findAll();
+        verify(voteitAssemblerMock, times(1)).assemble(givenVoteits);
     }
 }
