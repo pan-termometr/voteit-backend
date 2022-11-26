@@ -18,6 +18,9 @@ public class VoteitAssembler {
     }
 
     public Voteit assemble(final VoteitEntity voteit) {
+        if (voteit == null) {
+            return null;
+        }
         return Voteit.builder()
                 .id(Id.of(voteit.getId()))
                 .title(Title.of(voteit.getTitle()))

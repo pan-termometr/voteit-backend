@@ -13,8 +13,9 @@ class TitleTest {
 
     private static final String VALID_TITLE = "Valid title";
     private static final String INVALID_EMPTY_TITLE = "";
-    private static final int MAX_LENGTH = 80;
     private static final String INVALID_TOO_LONG_TITLE = generateTooLongTitle();
+    private static final String EXCEPTION_MESSAGE = "Title [%s] is not valid";
+    private static final int MAX_LENGTH = 80;
 
     private static String generateTooLongTitle() {
         return IntStream.range(0, MAX_LENGTH + 1)
@@ -39,7 +40,7 @@ class TitleTest {
         // then
         assertThat(result)
                 .isInstanceOf(InvalidTitle.class)
-                .hasMessage("Title [%s] is not valid", INVALID_TOO_LONG_TITLE);
+                .hasMessage(EXCEPTION_MESSAGE, INVALID_TOO_LONG_TITLE);
     }
 
     @Test
@@ -51,7 +52,6 @@ class TitleTest {
         // then
         assertThat(result)
                 .isInstanceOf(InvalidTitle.class)
-                .hasMessage("Title [%s] is not valid", INVALID_EMPTY_TITLE);
+                .hasMessage(EXCEPTION_MESSAGE, INVALID_EMPTY_TITLE);
     }
-
 }

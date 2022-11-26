@@ -3,6 +3,7 @@ package pl.maciejbadziak.voteitbackend.voteit.domain;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import org.springframework.lang.Nullable;
 
 import java.util.Set;
 
@@ -15,6 +16,7 @@ public final class Voteit {
     private final Title title;
     private final Description description;
     private final Url url;
+    @Nullable
     private final Thumbnail thumbnail;
     private final Vote votesUp;
     private final Vote votesDown;

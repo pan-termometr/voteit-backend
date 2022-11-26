@@ -14,14 +14,9 @@ class CreatorTest {
     private static final String VALID_CREATOR = "valid_creator";
     private static final String INVALID_CREATOR_WITH_CAPITAL_LETTER = "Invalid_creator";
     private static final String INVALID_EMPTY_CREATOR = "";
-    private static final int MAX_LENGTH = 30;
     private static final String INVALID_TOO_LONG_CREATOR = generateTooLongCreator();
-
-    private static String generateTooLongCreator() {
-        return IntStream.range(0, MAX_LENGTH + 1)
-                .mapToObj(i -> "x")
-                .collect(Collectors.joining(""));
-    }
+    private static final String EXCEPTION_MESSAGE = "Creator [%s] is not valid";
+    private static final int MAX_LENGTH = 30;
 
     @Test
     void shouldCreateValidCreator() {
@@ -29,6 +24,12 @@ class CreatorTest {
         // when
         // then
         assertThat(Creator.of(VALID_CREATOR).getValue()).isEqualTo(VALID_CREATOR);
+    }
+
+    private static String generateTooLongCreator() {
+        return IntStream.range(0, MAX_LENGTH + 1)
+                .mapToObj(i -> "x")
+                .collect(Collectors.joining(""));
     }
 
     @Test
@@ -40,7 +41,7 @@ class CreatorTest {
         // then
         assertThat(result)
                 .isInstanceOf(InvalidCreator.class)
-                .hasMessage("Creator [%s] is not valid", INVALID_CREATOR_WITH_CAPITAL_LETTER);
+                .hasMessage(EXCEPTION_MESSAGE, INVALID_CREATOR_WITH_CAPITAL_LETTER);
     }
 
     @Test
@@ -52,7 +53,7 @@ class CreatorTest {
         // then
         assertThat(result)
                 .isInstanceOf(InvalidCreator.class)
-                .hasMessage("Creator [%s] is not valid", INVALID_TOO_LONG_CREATOR);
+                .hasMessage(EXCEPTION_MESSAGE, INVALID_TOO_LONG_CREATOR);
     }
 
     @Test
@@ -64,6 +65,6 @@ class CreatorTest {
         // then
         assertThat(result)
                 .isInstanceOf(InvalidCreator.class)
-                .hasMessage("Creator [%s] is not valid", INVALID_EMPTY_CREATOR);
+                .hasMessage(EXCEPTION_MESSAGE, INVALID_EMPTY_CREATOR);
     }
 }

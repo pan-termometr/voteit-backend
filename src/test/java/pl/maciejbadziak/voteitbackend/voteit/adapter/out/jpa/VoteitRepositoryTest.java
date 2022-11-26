@@ -15,7 +15,7 @@ import static java.util.List.of;
 import static org.assertj.core.api.Assertions.assertThat;
 import static pl.maciejbadziak.voteitbackend.tag.testdata.TagEntityTestData.newsTag;
 import static pl.maciejbadziak.voteitbackend.tag.testdata.TagEntityTestData.travelTag;
-import static pl.maciejbadziak.voteitbackend.user.testdata.UserEntityTestData.termometrUser;
+import static pl.maciejbadziak.voteitbackend.user.testdata.UserEntityTestData.termometrUserEntity;
 import static pl.maciejbadziak.voteitbackend.voteit.testdata.VoteitEntityTestData.adsVoteitEntity;
 import static pl.maciejbadziak.voteitbackend.voteit.testdata.VoteitEntityTestData.onetVoteitEntity;
 
@@ -42,7 +42,7 @@ class VoteitRepositoryTest extends IntegrationTest {
         // given
         final VoteitEntity voteitEntity = onetVoteitEntity();
         final TagEntity tagEntity = newsTag();
-        final UserEntity userEntity = termometrUser();
+        final UserEntity userEntity = termometrUserEntity();
 
         userRepository.save(userEntity);
         tagRepository.save(tagEntity);
@@ -83,7 +83,7 @@ class VoteitRepositoryTest extends IntegrationTest {
         // given
         final List<VoteitEntity> entities = of(onetVoteitEntity(), adsVoteitEntity());
         final List<TagEntity> tagEntities = of(newsTag(), travelTag());
-        final UserEntity userEntity = termometrUser();
+        final UserEntity userEntity = termometrUserEntity();
 
         userRepository.save(userEntity);
         tagRepository.saveAll(tagEntities);
@@ -94,5 +94,15 @@ class VoteitRepositoryTest extends IntegrationTest {
 
         // then
         assertThat(result).hasSameSizeAs(entities);
+    }
+
+    @Test
+    void shouldReturnEmptyListForNoVoteits() {
+        // given
+        // when
+        final List<VoteitEntity> result = voteitRepository.findAll();
+
+        // then
+        assertThat(result).isEmpty();
     }
 }

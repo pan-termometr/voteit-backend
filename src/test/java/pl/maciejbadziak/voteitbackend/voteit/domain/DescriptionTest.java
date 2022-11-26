@@ -13,8 +13,9 @@ class DescriptionTest {
 
     private static final String VALID_DESCRIPTION = "Valid description";
     private static final String INVALID_EMPTY_DESCRIPTION = "";
-    private static final int MAX_LENGTH = 300;
     private static final String INVALID_TOO_LONG_DESCRIPTION = generateTooLongDescription();
+    private static final String EXCEPTION_MESSAGE = "Description [%s] is not valid";
+    private static final int MAX_LENGTH = 300;
 
     private static String generateTooLongDescription() {
         return IntStream.range(0, MAX_LENGTH + 1)
@@ -39,7 +40,7 @@ class DescriptionTest {
         // then
         assertThat(result)
                 .isInstanceOf(InvalidDescription.class)
-                .hasMessage("Description [%s] is not valid", INVALID_TOO_LONG_DESCRIPTION);
+                .hasMessage(EXCEPTION_MESSAGE, INVALID_TOO_LONG_DESCRIPTION);
     }
 
     @Test
@@ -51,6 +52,6 @@ class DescriptionTest {
         // then
         assertThat(result)
                 .isInstanceOf(InvalidDescription.class)
-                .hasMessage("Description [%s] is not valid", INVALID_EMPTY_DESCRIPTION);
+                .hasMessage(EXCEPTION_MESSAGE, INVALID_EMPTY_DESCRIPTION);
     }
 }

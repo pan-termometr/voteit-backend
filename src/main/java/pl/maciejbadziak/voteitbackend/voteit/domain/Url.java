@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Url {
 
-    private static final Pattern TITLE_PATTERN = Pattern.compile("https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=].{1,2035}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&/=]*){2048}$");
+    private static final Pattern URL_PATTERN = Pattern.compile("https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=].{1,2035}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&/=]*){2048}$");
 
     String value;
 
@@ -21,7 +21,7 @@ public class Url {
     }
 
     private static void validate(final String value) {
-        if (!TITLE_PATTERN.matcher(value).matches()) {
+        if (!URL_PATTERN.matcher(value).matches()) {
             throw new InvalidUrl(value);
         }
     }

@@ -3,6 +3,7 @@ package pl.maciejbadziak.voteitbackend.voteit.adapter.in.rest;
 import org.springframework.stereotype.Component;
 import pl.maciejbadziak.voteitbackend.voteit.adapter.in.rest.resources.VoteitResource;
 import pl.maciejbadziak.voteitbackend.voteit.domain.Tag;
+import pl.maciejbadziak.voteitbackend.voteit.domain.Thumbnail;
 import pl.maciejbadziak.voteitbackend.voteit.domain.Voteit;
 
 import java.util.List;
@@ -18,12 +19,15 @@ public class VoteitResourceAssembler {
                 .collect(Collectors.toList());
     }
     public VoteitResource assemble(final Voteit voteit) {
+        if (voteit == null) {
+            return null;
+        }
         return VoteitResource.builder()
                 .id(voteit.getId().getValue())
                 .title(voteit.getTitle().getValue())
                 .description(voteit.getDescription().getValue())
                 .url(voteit.getUrl().getValue())
-                .thumbnail(voteit.getThumbnail().getValue())
+                .thumbnail(assembleThumbnail(voteit.getThumbnail()))
                 .votesUp(voteit.getVotesUp().getValue())
                 .votesDown(voteit.getVotesDown().getValue())
                 .tags(assembleTags(voteit.getTags()))
@@ -33,9 +37,13 @@ public class VoteitResourceAssembler {
                 .build();
     }
 
-    private Set<String> assembleTags(Set<Tag> tags) {
+    private Set<String> assembleTags(final Set<Tag> tags) {
         return tags.stream()
                 .map(Tag::getValue)
                 .collect(Collectors.toSet());
+    }
+
+    private String assembleThumbnail(final Thumbnail thumbnail) {
+        return thumbnail == null ? null : thumbnail.getValue();
     }
 }

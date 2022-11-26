@@ -12,7 +12,7 @@ import static javax.persistence.FetchType.LAZY;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name = "User")
 @Getter
 @Setter
 @Table(name = "app_user")
