@@ -38,7 +38,7 @@ public class VoteitAssembler {
 
     private Set<Tag> mapToTag(final Set<TagEntity> tags) {
         return tags.stream()
-                .map(TagEntity::getName)
+                .map(TagEntity::getTagname)
                 .map(Tag::of)
                 .collect(Collectors.toSet());
     }

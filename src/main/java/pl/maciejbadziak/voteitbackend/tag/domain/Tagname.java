@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Tagname {
 
-    private static final Pattern TAGNAME_PATTERN = Pattern.compile("^(?=.{1,30}$)(^[a-zA-Z\\d-]*$)");
+    private static final Pattern TAGNAME_PATTERN = Pattern.compile("^[a-z\\d-]{1,30}+$");
 
     String value;
 

@@ -21,5 +21,5 @@ public class TagEntity {
     private Long id;
 
     @Column(name = "tagname", length = 30, nullable = false, unique = true)
-    private String name;
+    private String tagname;
 }

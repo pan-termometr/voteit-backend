@@ -18,7 +18,7 @@ import pl.maciejbadziak.voteitbackend.voteit.adapter.out.jpa.VoteitRepository;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static pl.maciejbadziak.voteitbackend.tag.testdata.TagEntityTestData.newsTag;
+import static pl.maciejbadziak.voteitbackend.tag.testdata.TagEntityTestData.newsTagEntity;
 import static pl.maciejbadziak.voteitbackend.user.testdata.UserEntityTestData.termometrUserEntity;
 import static pl.maciejbadziak.voteitbackend.voteit.testdata.VoteitEntityTestData.onetVoteitEntity;
 
@@ -48,7 +48,7 @@ class VoteitRestControllerIntegrationTest extends IntegrationTest {
     void shouldProvideVoteits() throws Exception {
         // given
         final VoteitEntity voteitEntity = onetVoteitEntity();
-        final TagEntity tagEntity = newsTag();
+        final TagEntity tagEntity = newsTagEntity();
         final UserEntity userEntity = termometrUserEntity();
 
         userRepository.save(userEntity);
@@ -68,7 +68,7 @@ class VoteitRestControllerIntegrationTest extends IntegrationTest {
                 .andExpect(jsonPath("$[0].thumbnail", is(voteitEntity.getThumbnail())))
                 .andExpect(jsonPath("$[0].votesUp", is(voteitEntity.getVotesUp())))
                 .andExpect(jsonPath("$[0].votesDown", is(voteitEntity.getVotesDown())))
-                .andExpect(jsonPath("$[0].tags[0]", is(tagEntity.getName())))
+                .andExpect(jsonPath("$[0].tags[0]", is(tagEntity.getTagname())))
                 .andExpect(jsonPath("$[0].forAdultOnly", is(voteitEntity.isForAdultOnly())))
                 .andExpect(jsonPath("$[0].creator", is(voteitEntity.getCreator().getUsername())))
                 .andExpect(jsonPath("$[0].creationDate", is(voteitEntity.getCreationDate().toString())));

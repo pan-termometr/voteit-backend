@@ -3,7 +3,7 @@ package pl.maciejbadziak.voteitbackend.voteit.domain;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Value;
-import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidUrl;
+import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidUrlException;
 
 import java.util.regex.Pattern;
 
@@ -22,7 +22,7 @@ public class Url {
 
     private static void validate(final String value) {
         if (!URL_PATTERN.matcher(value).matches()) {
-            throw new InvalidUrl(value);
+            throw new InvalidUrlException(value);
         }
     }
 }

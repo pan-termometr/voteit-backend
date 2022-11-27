@@ -13,8 +13,8 @@ import java.util.List;
 
 import static java.util.List.of;
 import static org.assertj.core.api.Assertions.assertThat;
-import static pl.maciejbadziak.voteitbackend.tag.testdata.TagEntityTestData.newsTag;
-import static pl.maciejbadziak.voteitbackend.tag.testdata.TagEntityTestData.travelTag;
+import static pl.maciejbadziak.voteitbackend.tag.testdata.TagEntityTestData.newsTagEntity;
+import static pl.maciejbadziak.voteitbackend.tag.testdata.TagEntityTestData.travelTagEntity;
 import static pl.maciejbadziak.voteitbackend.user.testdata.UserEntityTestData.termometrUserEntity;
 import static pl.maciejbadziak.voteitbackend.voteit.testdata.VoteitEntityTestData.adsVoteitEntity;
 import static pl.maciejbadziak.voteitbackend.voteit.testdata.VoteitEntityTestData.onetVoteitEntity;
@@ -41,7 +41,7 @@ class VoteitRepositoryTest extends IntegrationTest {
     void shouldReturnVoteit() {
         // given
         final VoteitEntity voteitEntity = onetVoteitEntity();
-        final TagEntity tagEntity = newsTag();
+        final TagEntity tagEntity = newsTagEntity();
         final UserEntity userEntity = termometrUserEntity();
 
         userRepository.save(userEntity);
@@ -82,7 +82,7 @@ class VoteitRepositoryTest extends IntegrationTest {
     void shouldReturnAllVoteits() {
         // given
         final List<VoteitEntity> entities = of(onetVoteitEntity(), adsVoteitEntity());
-        final List<TagEntity> tagEntities = of(newsTag(), travelTag());
+        final List<TagEntity> tagEntities = of(newsTagEntity(), travelTagEntity());
         final UserEntity userEntity = termometrUserEntity();
 
         userRepository.save(userEntity);

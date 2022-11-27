@@ -5,10 +5,13 @@ import pl.maciejbadziak.voteitbackend.tag.adapter.out.jpa.TagEntity;
 import pl.maciejbadziak.voteitbackend.voteit.domain.Tag;
 import pl.maciejbadziak.voteitbackend.voteit.domain.Voteit;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import static java.util.List.of;
 import static org.assertj.core.api.Assertions.assertThat;
+import static pl.maciejbadziak.voteitbackend.voteit.testdata.VoteitEntityTestData.adsVoteitEntity;
 import static pl.maciejbadziak.voteitbackend.voteit.testdata.VoteitEntityTestData.onetVoteitEntity;
 
 class VoteitAssemblerTest {
@@ -50,6 +53,18 @@ class VoteitAssemblerTest {
     }
 
     @Test
+    void shouldAssemblerVoteits() {
+        // given
+        final List<VoteitEntity> voteitEntities = of(onetVoteitEntity(), adsVoteitEntity());
+
+        // when
+        final List<Voteit> result = new VoteitAssembler().assemble(voteitEntities);
+
+        // then
+        assertThat(result).hasSameSizeAs(voteitEntities);
+    }
+
+    @Test
     void shouldReturnNullForNullableEntity() {
         // given
         // when
@@ -66,7 +81,7 @@ class VoteitAssemblerTest {
         assertThat(resultTags).extracting(
                 Tag::getValue
         ).contains(
-                expectedTagEntity.get().getName()
+                expectedTagEntity.get().getTagname()
         );
     }
 }

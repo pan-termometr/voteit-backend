@@ -3,7 +3,7 @@ package pl.maciejbadziak.voteitbackend.voteit.domain;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Value;
-import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidCreator;
+import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidCreatorException;
 
 import java.util.regex.Pattern;
 
@@ -22,7 +22,7 @@ public class Creator {
 
     private static void validate(final String value) {
         if (!CREATOR_PATTERN.matcher(value).matches()) {
-            throw new InvalidCreator(value);
+            throw new InvalidCreatorException(value);
         }
     }
 }

@@ -3,7 +3,7 @@ package pl.maciejbadziak.voteitbackend.voteit.domain;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Value;
-import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidThumbnail;
+import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidThumbnailException;
 
 import java.util.regex.Pattern;
 
@@ -23,7 +23,7 @@ public class Thumbnail {
 
     private static void validate(final String value) {
         if (isWrongUrl(value) || isWrongPath(value)) {
-            throw new InvalidThumbnail(value);
+            throw new InvalidThumbnailException(value);
         }
     }
 

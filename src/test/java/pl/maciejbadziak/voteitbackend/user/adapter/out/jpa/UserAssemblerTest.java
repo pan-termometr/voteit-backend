@@ -45,7 +45,7 @@ class UserAssemblerTest {
     }
 
     @Test
-    void shouldReturnNullFOrNullableEntity() {
+    void shouldReturnNullForNullableEntity() {
         // given
         // when
         final User result = new UserAssembler().assemble((UserEntity) null);

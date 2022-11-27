@@ -3,7 +3,7 @@ package pl.maciejbadziak.voteitbackend.voteit.domain;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Value;
-import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidTitle;
+import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidTitleException;
 
 import java.util.regex.Pattern;
 
@@ -22,7 +22,7 @@ public class Title {
 
     private static void validate(final String value) {
         if (!TITLE_PATTERN.matcher(value).matches()) {
-            throw new InvalidTitle(value);
+            throw new InvalidTitleException(value);
         }
     }
 }

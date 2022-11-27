@@ -10,6 +10,7 @@ import pl.maciejbadziak.voteitbackend.voteit.port.FindAllVoteitsPort;
 
 import java.util.List;
 
+import static java.util.List.of;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 import static pl.maciejbadziak.voteitbackend.voteit.testdata.VoteitTestData.adsVoteit;
@@ -27,7 +28,7 @@ class FindAllVoteitsUseCaseTest {
     @Test
     void shouldProvideAllVoteits() {
         // given
-        final List<Voteit> voteits = List.of(onetVoteit(), adsVoteit());
+        final List<Voteit> voteits = of(onetVoteit(), adsVoteit());
 
         when(findAllVoteitsPortMock.findAll()).thenReturn(voteits);
 

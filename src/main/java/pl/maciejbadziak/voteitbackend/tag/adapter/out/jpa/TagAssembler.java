@@ -21,7 +21,7 @@ public class TagAssembler {
             return null;
         }
         return Tag.builder()
-                .tagname(Tagname.of(tag.getName()))
+                .tagname(Tagname.of(tag.getTagname()))
                 .build();
     }
 }
