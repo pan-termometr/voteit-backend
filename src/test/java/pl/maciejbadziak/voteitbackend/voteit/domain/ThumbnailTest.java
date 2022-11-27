@@ -1,7 +1,7 @@
 package pl.maciejbadziak.voteitbackend.voteit.domain;
 
 import org.junit.jupiter.api.Test;
-import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidThumbnail;
+import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidThumbnailException;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -59,7 +59,7 @@ class ThumbnailTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidThumbnail.class)
+                .isInstanceOf(InvalidThumbnailException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_TOO_LONG_THUMBNAIL);
     }
 }

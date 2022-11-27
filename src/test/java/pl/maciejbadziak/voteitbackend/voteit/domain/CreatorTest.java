@@ -1,7 +1,7 @@
 package pl.maciejbadziak.voteitbackend.voteit.domain;
 
 import org.junit.jupiter.api.Test;
-import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidCreator;
+import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidCreatorException;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -40,7 +40,7 @@ class CreatorTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidCreator.class)
+                .isInstanceOf(InvalidCreatorException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_CREATOR_WITH_CAPITAL_LETTER);
     }
 
@@ -52,7 +52,7 @@ class CreatorTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidCreator.class)
+                .isInstanceOf(InvalidCreatorException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_TOO_LONG_CREATOR);
     }
 
@@ -64,7 +64,7 @@ class CreatorTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidCreator.class)
+                .isInstanceOf(InvalidCreatorException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_EMPTY_CREATOR);
     }
 }

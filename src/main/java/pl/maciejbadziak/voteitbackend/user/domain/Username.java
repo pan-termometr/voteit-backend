@@ -3,7 +3,7 @@ package pl.maciejbadziak.voteitbackend.user.domain;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Value;
-import pl.maciejbadziak.voteitbackend.user.domain.error.InvalidUsername;
+import pl.maciejbadziak.voteitbackend.user.domain.error.InvalidUsernameException;
 
 import java.util.regex.Pattern;
 
@@ -22,7 +22,7 @@ public class Username {
 
     private static void validate(final String value) {
         if (!USERNAME_PATTERN.matcher(value).matches()) {
-            throw new InvalidUsername(value);
+            throw new InvalidUsernameException(value);
         }
     }
 }

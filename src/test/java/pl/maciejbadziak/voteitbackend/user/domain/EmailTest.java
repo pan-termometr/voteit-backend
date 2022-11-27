@@ -1,7 +1,7 @@
 package pl.maciejbadziak.voteitbackend.user.domain;
 
 import org.junit.jupiter.api.Test;
-import pl.maciejbadziak.voteitbackend.user.domain.error.InvalidEmail;
+import pl.maciejbadziak.voteitbackend.user.domain.error.InvalidEmailException;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -18,7 +18,7 @@ class EmailTest {
     private static final String EXCEPTION_MESSAGE = "Email [%s] is not valid";
     private static final String MAIL_SUFFIX = "@mail.com";
     private static final int SUFFIX_LENGTH = MAIL_SUFFIX.length();
-    private static final int MAX_LENGTH = 320 - SUFFIX_LENGTH;
+    private static final int MAX_LENGTH = 320 - SUFFIX_LENGTH + 1;
     private static final String INVALID_TOO_LONG_EMAIL = generateTooLongEmail();
 
     private static String generateTooLongEmail() {
@@ -44,7 +44,7 @@ class EmailTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidEmail.class)
+                .isInstanceOf(InvalidEmailException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_EMAIL_WITHOUT_AT);
     }
 
@@ -56,7 +56,7 @@ class EmailTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidEmail.class)
+                .isInstanceOf(InvalidEmailException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_EMAIL_WITHOUT_DOT);
     }
 
@@ -68,7 +68,7 @@ class EmailTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidEmail.class)
+                .isInstanceOf(InvalidEmailException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_TOO_SHORT_EMAIL);
     }
 
@@ -80,7 +80,7 @@ class EmailTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidEmail.class)
+                .isInstanceOf(InvalidEmailException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_TOO_LONG_EMAIL);
     }
 }

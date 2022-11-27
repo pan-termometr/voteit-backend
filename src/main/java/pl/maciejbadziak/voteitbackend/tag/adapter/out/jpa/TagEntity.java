@@ -1,6 +1,9 @@
 package pl.maciejbadziak.voteitbackend.tag.adapter.out.jpa;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +15,6 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Entity
 @Getter
-@Setter
 @Table(name = "tag")
 public class TagEntity {
 
@@ -21,5 +23,5 @@ public class TagEntity {
     private Long id;
 
     @Column(name = "tagname", length = 30, nullable = false, unique = true)
-    private String name;
+    private String tagname;
 }

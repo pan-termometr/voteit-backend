@@ -1,6 +1,9 @@
 package pl.maciejbadziak.voteitbackend.voteit.adapter.out.jpa;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import pl.maciejbadziak.voteitbackend.tag.adapter.out.jpa.TagEntity;
 import pl.maciejbadziak.voteitbackend.user.adapter.out.jpa.UserEntity;
 
@@ -15,7 +18,6 @@ import static javax.persistence.FetchType.LAZY;
 @AllArgsConstructor
 @Entity
 @Getter
-@Setter
 @Table(name = "voteit")
 public class VoteitEntity {
 

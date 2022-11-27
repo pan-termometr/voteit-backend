@@ -3,7 +3,7 @@ package pl.maciejbadziak.voteitbackend.voteit.domain;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Value;
-import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidDescription;
+import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidDescriptionException;
 
 import java.util.regex.Pattern;
 
@@ -22,7 +22,7 @@ public class Description {
 
     private static void validate(final String value) {
         if (!DESCRIPTION_PATTERN.matcher(value).matches()) {
-            throw new InvalidDescription(value);
+            throw new InvalidDescriptionException(value);
         }
     }
 }

@@ -1,7 +1,7 @@
 package pl.maciejbadziak.voteitbackend.voteit.domain;
 
 import org.junit.jupiter.api.Test;
-import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidTag;
+import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidTagException;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 
 class TagTest {
 
-    private static final String VALID_TAG = "validtag";
+    private static final String VALID_TAG = "valid-tag1";
     private static final String INVALID_TAG_WITH_CAPITAL_LETTER = "Invalidtag";
     private static final String INVALID_EMPTY_TAG = "";
     private static final String INVALID_TOO_LONG_TAG = generateTooLongTag();
@@ -40,7 +40,7 @@ class TagTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidTag.class)
+                .isInstanceOf(InvalidTagException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_TAG_WITH_CAPITAL_LETTER);
     }
 
@@ -52,7 +52,7 @@ class TagTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidTag.class)
+                .isInstanceOf(InvalidTagException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_TOO_LONG_TAG);
     }
 
@@ -64,7 +64,7 @@ class TagTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidTag.class)
+                .isInstanceOf(InvalidTagException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_EMPTY_TAG);
     }
 }

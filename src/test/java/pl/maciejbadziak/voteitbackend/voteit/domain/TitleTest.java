@@ -1,7 +1,7 @@
 package pl.maciejbadziak.voteitbackend.voteit.domain;
 
 import org.junit.jupiter.api.Test;
-import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidTitle;
+import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidTitleException;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -39,7 +39,7 @@ class TitleTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidTitle.class)
+                .isInstanceOf(InvalidTitleException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_TOO_LONG_TITLE);
     }
 
@@ -51,7 +51,7 @@ class TitleTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidTitle.class)
+                .isInstanceOf(InvalidTitleException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_EMPTY_TITLE);
     }
 }

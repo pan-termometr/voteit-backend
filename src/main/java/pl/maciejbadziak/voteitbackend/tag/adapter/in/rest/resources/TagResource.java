@@ -1,12 +1,10 @@
-package pl.maciejbadziak.voteitbackend.user.adapter.in.rest.resources;
+package pl.maciejbadziak.voteitbackend.tag.adapter.in.rest.resources;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDateTime;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 
@@ -15,9 +13,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 @Builder
 @EqualsAndHashCode
 @JsonInclude(NON_EMPTY)
-public class UserResource {
+public class TagResource {
 
-    private final String username;
-    private final String email;
-    private final LocalDateTime registrationDate;
+    private final String tagname;
 }

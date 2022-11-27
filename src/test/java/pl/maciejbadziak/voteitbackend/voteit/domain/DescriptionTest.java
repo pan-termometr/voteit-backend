@@ -1,7 +1,7 @@
 package pl.maciejbadziak.voteitbackend.voteit.domain;
 
 import org.junit.jupiter.api.Test;
-import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidDescription;
+import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidDescriptionException;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -39,7 +39,7 @@ class DescriptionTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidDescription.class)
+                .isInstanceOf(InvalidDescriptionException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_TOO_LONG_DESCRIPTION);
     }
 
@@ -51,7 +51,7 @@ class DescriptionTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidDescription.class)
+                .isInstanceOf(InvalidDescriptionException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_EMPTY_DESCRIPTION);
     }
 }

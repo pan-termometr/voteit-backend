@@ -1,10 +1,10 @@
 package pl.maciejbadziak.voteitbackend.user.domain.error;
 
-public class InvalidUsername extends RuntimeException {
+public class InvalidUsernameException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-    public InvalidUsername(final String username) {
+    public InvalidUsernameException(final String username) {
         super(String.format("Username [%s] is not valid", username));
     }
 }

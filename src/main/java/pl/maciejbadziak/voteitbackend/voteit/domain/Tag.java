@@ -3,7 +3,7 @@ package pl.maciejbadziak.voteitbackend.voteit.domain;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Value;
-import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidTag;
+import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidTagException;
 
 import java.util.regex.Pattern;
 
@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Tag {
 
-    private static final Pattern TAG_PATTERN = Pattern.compile("^[a-z]{1,10}+$");
+    private static final Pattern TAG_PATTERN = Pattern.compile("^[a-z\\d-]{1,30}+$");
 
     String value;
 
@@ -22,7 +22,7 @@ public class Tag {
 
     private static void validate(final String value) {
         if (!TAG_PATTERN.matcher(value).matches()) {
-            throw new InvalidTag(value);
+            throw new InvalidTagException(value);
         }
     }
 }

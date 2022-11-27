@@ -1,7 +1,7 @@
 package pl.maciejbadziak.voteitbackend.voteit.domain;
 
 import org.junit.jupiter.api.Test;
-import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidUrl;
+import pl.maciejbadziak.voteitbackend.voteit.domain.error.InvalidUrlException;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -44,7 +44,7 @@ class UrlTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidUrl.class)
+                .isInstanceOf(InvalidUrlException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_TOO_LONG_URL);
     }
 
@@ -56,7 +56,7 @@ class UrlTest {
 
         // then
         assertThat(result)
-                .isInstanceOf(InvalidUrl.class)
+                .isInstanceOf(InvalidUrlException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_EMPTY_URL);
     }
 }

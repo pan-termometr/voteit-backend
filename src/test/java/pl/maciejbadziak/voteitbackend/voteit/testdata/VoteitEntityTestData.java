@@ -5,8 +5,8 @@ import pl.maciejbadziak.voteitbackend.voteit.adapter.out.jpa.VoteitEntity;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import static pl.maciejbadziak.voteitbackend.tag.testdata.TagEntityTestData.newsTag;
-import static pl.maciejbadziak.voteitbackend.tag.testdata.TagEntityTestData.travelTag;
+import static pl.maciejbadziak.voteitbackend.tag.testdata.TagEntityTestData.newsTagEntity;
+import static pl.maciejbadziak.voteitbackend.tag.testdata.TagEntityTestData.travelTagEntity;
 import static pl.maciejbadziak.voteitbackend.user.testdata.UserEntityTestData.termometrUserEntity;
 
 public class VoteitEntityTestData {
@@ -20,7 +20,7 @@ public class VoteitEntityTestData {
                 .thumbnail("/voteit-1.jpg")
                 .votesUp(900)
                 .votesDown(13)
-                .tags(Set.of(newsTag()))
+                .tags(Set.of(newsTagEntity()))
                 .isForAdultOnly(false)
                 .creator(termometrUserEntity())
                 .creationDate(LocalDateTime.of(2022, 11, 11, 13, 13, 13))
@@ -36,7 +36,7 @@ public class VoteitEntityTestData {
                 .thumbnail("/voteit-2.jpg")
                 .votesUp(1000)
                 .votesDown(0)
-                .tags(Set.of(travelTag()))
+                .tags(Set.of(travelTagEntity()))
                 .isForAdultOnly(false)
                 .creator(termometrUserEntity())
                 .creationDate(LocalDateTime.of(2022, 11, 11, 13, 13, 13))

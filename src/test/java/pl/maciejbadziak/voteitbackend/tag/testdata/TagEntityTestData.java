@@ -4,17 +4,17 @@ import pl.maciejbadziak.voteitbackend.tag.adapter.out.jpa.TagEntity;
 
 public class TagEntityTestData {
 
-    public static TagEntity newsTag() {
+    public static TagEntity newsTagEntity() {
         return TagEntity.builder()
                 .id(1L)
-                .name("news")
+                .tagname("news")
                 .build();
     }
 
-    public static TagEntity travelTag() {
+    public static TagEntity travelTagEntity() {
         return TagEntity.builder()
                 .id(2L)
-                .name("travel")
+                .tagname("travel")
                 .build();
     }
 }
