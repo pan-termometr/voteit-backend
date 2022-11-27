@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 @Value
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Email {
-    private static final Pattern EMAIL_PATTERN = Pattern.compile("^([a-zA-Z\\d_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z\\d.-]*).{6,320}$");
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("^(?=.{6,320}$)([a-zA-Z\\d_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z\\d.-]*)$");
 
     String value;
 

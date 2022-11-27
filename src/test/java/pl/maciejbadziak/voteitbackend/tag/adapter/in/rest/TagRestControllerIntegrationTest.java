@@ -13,6 +13,7 @@ import pl.maciejbadziak.voteitbackend.tag.adapter.out.jpa.TagRepository;
 
 import java.util.List;
 
+import static java.util.List.of;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -34,11 +35,11 @@ class TagRestControllerIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    void shouldProvideTags() throws Exception {
+    void shouldProvideAllTags() throws Exception {
         // given
         final TagEntity newsTagEntity = newsTagEntity();
         final TagEntity travelTagEntity = travelTagEntity();
-        final List<TagEntity> tagEntities = List.of(newsTagEntity, travelTagEntity);
+        final List<TagEntity> tagEntities = of(newsTagEntity, travelTagEntity);
 
         tagRepository.saveAll(tagEntities);
 

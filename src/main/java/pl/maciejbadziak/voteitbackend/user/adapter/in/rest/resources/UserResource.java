@@ -1,7 +1,10 @@
 package pl.maciejbadziak.voteitbackend.user.adapter.in.rest.resources;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
@@ -10,7 +13,6 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_EMPTY;
 @Getter
 @Setter
 @Builder
-@ToString
 @EqualsAndHashCode
 @JsonInclude(NON_EMPTY)
 public class UserResource {

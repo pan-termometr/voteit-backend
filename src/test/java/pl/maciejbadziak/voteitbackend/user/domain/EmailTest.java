@@ -18,7 +18,7 @@ class EmailTest {
     private static final String EXCEPTION_MESSAGE = "Email [%s] is not valid";
     private static final String MAIL_SUFFIX = "@mail.com";
     private static final int SUFFIX_LENGTH = MAIL_SUFFIX.length();
-    private static final int MAX_LENGTH = 320 - SUFFIX_LENGTH;
+    private static final int MAX_LENGTH = 320 - SUFFIX_LENGTH + 1;
     private static final String INVALID_TOO_LONG_EMAIL = generateTooLongEmail();
 
     private static String generateTooLongEmail() {
