@@ -10,6 +10,8 @@ import lombok.Getter;
 public class User {
 
     private final Username username;
+    private final String password;
+    private final String matchingPassword;
     private final Email email;
     private final RegistrationDate registrationDate;
 }

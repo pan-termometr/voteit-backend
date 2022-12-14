@@ -21,6 +21,8 @@ import static pl.maciejbadziak.voteitbackend.user.testdata.UserEntityTestData.te
 @AutoConfigureMockMvc
 class UserRestControllerIntegrationTest extends IntegrationTest {
 
+    private static final String USERS_URL = "/user/";
+
     @Autowired
     private transient MockMvc mvc;
 
@@ -41,7 +43,7 @@ class UserRestControllerIntegrationTest extends IntegrationTest {
         userRepository.saveAll(of(termometrUserEntity, testUserEntity));
         // when
 
-        final ResultActions result = mvc.perform(get("/users/" + termometrUserEntity.getUsername()));
+        final ResultActions result = mvc.perform(get(USERS_URL + termometrUserEntity.getUsername()));
         // then
         result.andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
