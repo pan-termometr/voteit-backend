@@ -1,27 +1,46 @@
 package pl.maciejbadziak.voteitbackend.user.adapter.in.rest;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.maciejbadziak.voteitbackend.user.adapter.in.rest.error.InvalidRequestException;
 import pl.maciejbadziak.voteitbackend.user.adapter.in.rest.resources.UserResource;
+import pl.maciejbadziak.voteitbackend.user.domain.User;
 import pl.maciejbadziak.voteitbackend.user.usecase.FindUserByUsernameUseCase;
+import pl.maciejbadziak.voteitbackend.user.usecase.RegisterNewUserUseCase;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/users")
+@RequestMapping(path = "/user")
 public class UserRestController {
 
     private static final int USERNAME_MAX_LENGTH = 30;
 
     private final FindUserByUsernameUseCase findUserByUsernameUseCase;
 
-    private final UserResourceAssembler assembler;
+    private final RegisterNewUserUseCase registerNewUserUseCase;
 
-    private static void validateRequest(final String username) {
+    private final UserResourceAssembler userResourceAssembler;
+
+    private final UserAssembler userAssembler;
+
+    @GetMapping(
+            path = "/{username}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public UserResource userByUsername(@PathVariable final String username) throws InvalidRequestException {
+        validateUsername(username);
+        return userResourceAssembler.assemble(findUserByUsernameUseCase.find(username));
+    }
+
+    @PostMapping("/registration")
+    public UserResource registerUser(@RequestBody @Valid UserResource userResource) {
+        User user = userAssembler.assemble(userResource);
+        return userResourceAssembler.assemble(registerNewUserUseCase.register(user));
+    }
+
+    private static void validateUsername(final String username) throws InvalidRequestException {
         if(isUsernameInvalid(username)) {
             throw new InvalidRequestException(username);
         }
@@ -30,14 +49,4 @@ public class UserRestController {
     private static boolean isUsernameInvalid(final String username) {
         return username.isBlank() || username.length() >= USERNAME_MAX_LENGTH;
     }
-
-    @GetMapping(
-            path = "/{username}",
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    public UserResource userByUsername(@PathVariable final String username) {
-        validateRequest(username);
-        return assembler.assemble(findUserByUsernameUseCase.find(username));
-    }
-
 }

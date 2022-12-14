@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/voteits")
+@RequestMapping(path = "/voteit")
 public class VoteitRestController {
 
     private static final String VOTEITS = "voteits";

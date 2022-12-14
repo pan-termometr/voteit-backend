@@ -12,10 +12,10 @@ import pl.maciejbadziak.voteitbackend.tag.usecase.FindAllTagsUseCase;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/tags")
+@RequestMapping(path = "/tag")
 public class TagRestController {
 
-    private static final String TAGS = "voteits";
+    private static final String TAGS = "tags";
 
     @Autowired
     private TagResourceAssembler tagResourceAssembler;

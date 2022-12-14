@@ -30,6 +30,8 @@ import static pl.maciejbadziak.voteitbackend.voteit.testdata.VoteitEntityTestDat
 @AutoConfigureMockMvc
 class VoteitRestControllerIntegrationTest extends IntegrationTest {
 
+    private static final String VOTEIT_URL = "/voteit";
+
     @Autowired
     private transient MockMvc mvc;
 
@@ -65,7 +67,7 @@ class VoteitRestControllerIntegrationTest extends IntegrationTest {
         voteitRepository.saveAll(voteitEntities);
 
         // when
-        final ResultActions result = mvc.perform(get("/voteits"));
+        final ResultActions result = mvc.perform(get(VOTEIT_URL));
 
         // then
         result.andExpect(status().isOk())

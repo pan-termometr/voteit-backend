@@ -23,6 +23,8 @@ import static pl.maciejbadziak.voteitbackend.tag.testdata.TagEntityTestData.trav
 @AutoConfigureMockMvc
 class TagRestControllerIntegrationTest extends IntegrationTest {
 
+    private static final String TAGS_URL = "/tag";
+
     @Autowired
     private transient MockMvc mvc;
 
@@ -44,7 +46,7 @@ class TagRestControllerIntegrationTest extends IntegrationTest {
         tagRepository.saveAll(tagEntities);
 
         // when
-        final ResultActions result = mvc.perform(get("/tags"));
+        final ResultActions result = mvc.perform(get(TAGS_URL));
 
         // then
         result.andExpect(status().isOk())
