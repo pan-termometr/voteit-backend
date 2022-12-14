@@ -9,6 +9,7 @@ import pl.maciejbadziak.voteitbackend.user.adapter.in.rest.resources.UserResourc
 import pl.maciejbadziak.voteitbackend.user.domain.User;
 import pl.maciejbadziak.voteitbackend.user.usecase.FindUserByUsernameUseCase;
 import pl.maciejbadziak.voteitbackend.user.usecase.RegisterNewUserUseCase;
+import pl.maciejbadziak.voteitbackend.user.usecase.error.UserAlreadyExistsException;
 
 @RestController
 @RequiredArgsConstructor
@@ -35,8 +36,8 @@ public class UserRestController {
     }
 
     @PostMapping("/registration")
-    public UserResource registerUser(@RequestBody @Valid UserResource userResource) {
-        User user = userAssembler.assemble(userResource);
+    public UserResource registerUser(@RequestBody @Valid UserResource userResource) throws UserAlreadyExistsException {
+        final User user = userAssembler.assemble(userResource);
         return userResourceAssembler.assemble(registerNewUserUseCase.register(user));
     }
 
