@@ -1,7 +1,9 @@
 package pl.maciejbadziak.voteitbackend.user.adapter.out.jpa;
 
+import org.springframework.stereotype.Component;
 import pl.maciejbadziak.voteitbackend.user.domain.User;
 
+@Component
 public class UserEntityAssembler {
 
     public UserEntity assemble(final User user) {

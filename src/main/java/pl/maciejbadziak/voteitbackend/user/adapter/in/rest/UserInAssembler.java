@@ -7,7 +7,7 @@ import pl.maciejbadziak.voteitbackend.user.domain.User;
 import pl.maciejbadziak.voteitbackend.user.domain.Username;
 
 @Component
-public class UserAssembler {
+public class UserInAssembler {
 
     public User assemble(final UserResource userResource) {
         return User.builder()

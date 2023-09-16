@@ -24,7 +24,7 @@ public class UserRestController {
 
     private final UserResourceAssembler userResourceAssembler;
 
-    private final UserAssembler userAssembler;
+    private final UserInAssembler userInAssembler;
 
     @GetMapping(
             path = "/{username}",
@@ -37,7 +37,7 @@ public class UserRestController {
 
     @PostMapping("/registration")
     public UserResource registerUser(@RequestBody @Valid UserResource userResource) throws UserAlreadyExistsException {
-        final User user = userAssembler.assemble(userResource);
+        final User user = userInAssembler.assemble(userResource);
         return userResourceAssembler.assemble(registerNewUserUseCase.register(user));
     }
 
