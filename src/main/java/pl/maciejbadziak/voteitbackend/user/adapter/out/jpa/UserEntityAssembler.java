@@ -11,6 +11,7 @@ public class UserEntityAssembler {
                 .username(user.getUsername().getValue())
                 .password(user.getPassword())
                 .email(user.getEmail().getValue())
+                .registrationDate(user.getRegistrationDate().getValue())
                 .build();
     }
 }

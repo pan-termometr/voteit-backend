@@ -23,6 +23,7 @@ public class VoteitEntity {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "title", length = 80, nullable = false)

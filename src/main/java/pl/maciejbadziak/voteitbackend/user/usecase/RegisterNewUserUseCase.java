@@ -31,14 +31,14 @@ public class RegisterNewUserUseCase {
     private void checkIfEmailExists(final Email email) throws UserAlreadyExistsException {
         User user = findUserByEmailUseCase.find(email.getValue());
         if(user != null) {
-            throw new UserAlreadyExistsException("There is an account with that email address: " + email.getValue());
+            throw new UserAlreadyExistsException(String.format("User with this email (%s) already exists.", email.getValue()));
         }
     }
 
     private void checkIfUsernameExists(final Username username) throws UserAlreadyExistsException {
         User user = findUserByUsernameUseCase.find(username.getValue());
         if(user != null) {
-            throw new UserAlreadyExistsException("There is an account with that username: " + username.getValue());
+            throw new UserAlreadyExistsException(String.format("User with this username (%s) already exists.", username.getValue()));
         }
     }
 

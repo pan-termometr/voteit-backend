@@ -29,14 +29,11 @@ public class UserResource {
     @NotNull
     @NotEmpty
     private final String password;
-    private final String matchingPassword;
 
     @ValidEmail
     @NotNull
     @NotEmpty
     private final String email;
 
-    @NotNull
-    @NotEmpty
     private final LocalDateTime registrationDate;
 }

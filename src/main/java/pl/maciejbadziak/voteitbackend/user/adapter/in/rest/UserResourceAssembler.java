@@ -5,7 +5,6 @@ import pl.maciejbadziak.voteitbackend.user.adapter.in.rest.resources.UserResourc
 import pl.maciejbadziak.voteitbackend.user.domain.User;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class UserResourceAssembler {
@@ -13,7 +12,7 @@ public class UserResourceAssembler {
     public List<UserResource> assemble(final List<User> users) {
         return users.stream()
                 .map(this::assemble)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public UserResource assemble(final User user) {
