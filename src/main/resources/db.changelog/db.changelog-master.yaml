@@ -4,33 +4,33 @@ databaseChangeLog:
       author: termometr
       changes:
         sqlFile:
-          path: db.changelog/setup-scripts/changelog-user-structure.sql
+          path: setup-scripts/changelog-user-structure.sql
           relativeToChangelogFile: true
   - changeSet:
       id: changelog-tag-structure
       author: termometr
       changes:
         sqlFile:
-          path: db.changelog/setup-scripts/changelog-tag-structure.sql
+          path: setup-scripts/changelog-tag-structure.sql
           relativeToChangelogFile: true
   - changeSet:
       id: changelog-voteit-structure
       author: termometr
       changes:
         sqlFile:
-          path: db.changelog/setup-scripts/changelog-voteit-structure.sql
+          path: setup-scripts/changelog-voteit-structure.sql
           relativeToChangelogFile: true
   - changeSet:
       id: changelog-voteit-tag-x-structure
       author: termometr
       changes:
         sqlFile:
-          path: db.changelog/setup-scripts/changelog-voteit-tag-x-structure.sql
+          path: setup-scripts/changelog-voteit-tag-x-structure.sql
           relativeToChangelogFile: true
   - changeSet:
       id: changelog-add-registration-date-column-to-user-table
       author: termometr
       changes:
         sqlFile:
-          path: db.changelog/setup-scripts/changelog-add-registration-date-column-to-user-table.sql
+          path: setup-scripts/changelog-add-registration-date-column-to-user-table.sql
           relativeToChangelogFile: true

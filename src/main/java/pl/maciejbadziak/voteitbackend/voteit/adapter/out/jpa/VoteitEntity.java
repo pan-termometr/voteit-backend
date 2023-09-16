@@ -1,5 +1,6 @@
 package pl.maciejbadziak.voteitbackend.voteit.adapter.out.jpa;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -7,11 +8,10 @@ import lombok.NoArgsConstructor;
 import pl.maciejbadziak.voteitbackend.tag.adapter.out.jpa.TagEntity;
 import pl.maciejbadziak.voteitbackend.user.adapter.out.jpa.UserEntity;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import static javax.persistence.FetchType.LAZY;
+import static jakarta.persistence.FetchType.LAZY;
 
 @Builder
 @NoArgsConstructor
