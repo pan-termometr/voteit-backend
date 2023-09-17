@@ -8,7 +8,6 @@ public class UserEntityTestData {
 
     public static UserEntity termometrUserEntity() {
         return UserEntity.builder()
-                .id(1L)
                 .username("termometr")
                 .password("password")
                 .email("termometr@voteit.com")
@@ -18,7 +17,6 @@ public class UserEntityTestData {
 
     public static UserEntity testUserEntity() {
         return UserEntity.builder()
-                .id(2L)
                 .username("test")
                 .password("password")
                 .email("test@voteit.com")

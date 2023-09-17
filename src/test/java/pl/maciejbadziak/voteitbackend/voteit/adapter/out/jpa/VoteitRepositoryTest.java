@@ -40,13 +40,15 @@ class VoteitRepositoryTest extends IntegrationTest {
     @Test
     void shouldReturnVoteit() {
         // given
-        final VoteitEntity voteitEntity = onetVoteitEntity();
-        final TagEntity tagEntity = newsTagEntity();
         final UserEntity userEntity = termometrUserEntity();
 
         userRepository.save(userEntity);
+
+        final TagEntity tagEntity = newsTagEntity();
+        final VoteitEntity voteitEntity = onetVoteitEntity();
+
         tagRepository.save(tagEntity);
-        voteitRepository.save(voteitEntity);
+        voteitRepository.save(voteitEntity.withCreator(userEntity));
 
         // when
         final List<VoteitEntity> result = voteitRepository.findAll();
@@ -55,7 +57,6 @@ class VoteitRepositoryTest extends IntegrationTest {
         assertThat(result)
                 .hasSize(1)
                 .flatExtracting(
-                        VoteitEntity::getId,
                         VoteitEntity::getTitle,
                         VoteitEntity::getDescription,
                         VoteitEntity::getUrl,
@@ -66,7 +67,6 @@ class VoteitRepositoryTest extends IntegrationTest {
                         VoteitEntity::getCreationDate
                 )
                 .containsExactly(
-                        voteitEntity.getId(),
                         voteitEntity.getTitle(),
                         voteitEntity.getDescription(),
                         voteitEntity.getUrl(),
@@ -81,11 +81,13 @@ class VoteitRepositoryTest extends IntegrationTest {
     @Test
     void shouldReturnAllVoteits() {
         // given
-        final List<VoteitEntity> entities = of(onetVoteitEntity(), adsVoteitEntity());
-        final List<TagEntity> tagEntities = of(newsTagEntity(), travelTagEntity());
         final UserEntity userEntity = termometrUserEntity();
 
         userRepository.save(userEntity);
+
+        final List<TagEntity> tagEntities = of(newsTagEntity(), travelTagEntity());
+        final List<VoteitEntity> entities = of(onetVoteitEntity().withCreator(userEntity), adsVoteitEntity().withCreator(userEntity));
+
         tagRepository.saveAll(tagEntities);
         voteitRepository.saveAll(entities);
 
