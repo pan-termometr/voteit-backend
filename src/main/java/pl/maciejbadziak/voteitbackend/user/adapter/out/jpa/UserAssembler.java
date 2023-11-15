@@ -7,7 +7,6 @@ import pl.maciejbadziak.voteitbackend.user.domain.User;
 import pl.maciejbadziak.voteitbackend.user.domain.Username;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class UserAssembler {
@@ -15,7 +14,7 @@ public class UserAssembler {
     public List<User> assemble(final List<UserEntity> users) {
         return users.stream()
                 .map(this::assemble)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public User assemble(final UserEntity user) {

@@ -13,7 +13,6 @@ public class VoteitEntityTestData {
 
     public static VoteitEntity onetVoteitEntity() {
         return VoteitEntity.builder()
-                .id(1L)
                 .title("Onet")
                 .description("News from Poland")
                 .url("https://onet.pl")
@@ -29,7 +28,6 @@ public class VoteitEntityTestData {
 
     public static VoteitEntity adsVoteitEntity() {
         return VoteitEntity.builder()
-                .id(2L)
                 .title("Autostopem Dookoła Świata")
                 .description("Blog podróżniczy")
                 .url("https://autostopemdookolaswiata.pl")

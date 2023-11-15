@@ -23,6 +23,9 @@ class UserJpaAdapterTest {
     @Mock
     private transient UserAssembler userAssemblerMock;
 
+    @Mock
+    private transient UserEntityAssembler userEntityAssemblerMock;
+
     @InjectMocks
     private transient UserJpaAdapter userJpaAdapter;
 
@@ -44,5 +47,40 @@ class UserJpaAdapterTest {
         verify(userAssemblerMock, times(1)).assemble(givenUserEntity);
     }
 
+    @Test
+    void shouldProvideUserByEmail() {
+        // given
+        final UserEntity givenUserEntity = testUserEntity();
+        final User expectedUser = testUser();
 
+        when(userRepositoryMock.findByEmail(givenUserEntity.getEmail())).thenReturn(Optional.of(givenUserEntity));
+        when(userAssemblerMock.assemble(givenUserEntity)).thenReturn(expectedUser);
+
+        // when
+        final User result = userJpaAdapter.findByEmail(givenUserEntity.getEmail());
+
+        // then
+        assertThat(result).isEqualTo(expectedUser);
+        verify(userRepositoryMock, times(1)).findByEmail(givenUserEntity.getEmail());
+        verify(userAssemblerMock, times(1)).assemble(givenUserEntity);
+    }
+
+    @Test
+    void shouldProvideRegisteredNewUser() {
+        // given
+        final UserEntity userEntity = testUserEntity();
+        final User user = testUser();
+
+        when(userEntityAssemblerMock.assemble(user)).thenReturn(userEntity);
+        when(userRepositoryMock.save(userEntity)).thenReturn(userEntity);
+        when(userAssemblerMock.assemble(userEntity)).thenReturn(user);
+
+        // when
+        final User result = userJpaAdapter.registerNewUser(user);
+
+        // then
+        assertThat(result).isEqualTo(user);
+        verify(userEntityAssemblerMock, times(1)).assemble(user);
+        verify(userRepositoryMock, times(1)).save(userEntity);
+    }
 }

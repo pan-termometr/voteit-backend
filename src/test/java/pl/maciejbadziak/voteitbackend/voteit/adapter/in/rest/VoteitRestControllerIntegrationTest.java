@@ -30,6 +30,8 @@ import static pl.maciejbadziak.voteitbackend.voteit.testdata.VoteitEntityTestDat
 @AutoConfigureMockMvc
 class VoteitRestControllerIntegrationTest extends IntegrationTest {
 
+    private static final String VOTEIT_URL = "/voteit";
+
     @Autowired
     private transient MockMvc mvc;
 
@@ -53,24 +55,25 @@ class VoteitRestControllerIntegrationTest extends IntegrationTest {
     void shouldProvideAllVoteits() throws Exception {
         // given
         final UserEntity termometrUserEntity = termometrUserEntity();
+
+        userRepository.save(termometrUserEntity);
+
         final TagEntity newsTagEntity = newsTagEntity();
         final TagEntity travelTagEntity = travelTagEntity();
-        final VoteitEntity onetVoteitEntity = onetVoteitEntity();
-        final VoteitEntity adsVoteitEntity = adsVoteitEntity();
+        final VoteitEntity onetVoteitEntity = onetVoteitEntity().withCreator(termometrUserEntity);
+        final VoteitEntity adsVoteitEntity = adsVoteitEntity().withCreator(termometrUserEntity);
         final List<TagEntity> tagEntities = of(newsTagEntity, travelTagEntity);
         final List<VoteitEntity> voteitEntities = of(onetVoteitEntity, adsVoteitEntity);
 
-        userRepository.save(termometrUserEntity);
         tagRepository.saveAll(tagEntities);
         voteitRepository.saveAll(voteitEntities);
 
         // when
-        final ResultActions result = mvc.perform(get("/voteits"));
+        final ResultActions result = mvc.perform(get(VOTEIT_URL));
 
         // then
         result.andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].id", is(onetVoteitEntity.getId().intValue())))
                 .andExpect(jsonPath("$[0].title", is(onetVoteitEntity.getTitle())))
                 .andExpect(jsonPath("$[0].description", is(onetVoteitEntity.getDescription())))
                 .andExpect(jsonPath("$[0].url", is(onetVoteitEntity.getUrl())))
@@ -81,7 +84,6 @@ class VoteitRestControllerIntegrationTest extends IntegrationTest {
                 .andExpect(jsonPath("$[0].forAdultOnly", is(onetVoteitEntity.isForAdultOnly())))
                 .andExpect(jsonPath("$[0].creator", is(onetVoteitEntity.getCreator().getUsername())))
                 .andExpect(jsonPath("$[0].creationDate", is(onetVoteitEntity.getCreationDate().toString())))
-                .andExpect(jsonPath("$[1].id", is(adsVoteitEntity.getId().intValue())))
                 .andExpect(jsonPath("$[1].title", is(adsVoteitEntity.getTitle())))
                 .andExpect(jsonPath("$[1].description", is(adsVoteitEntity.getDescription())))
                 .andExpect(jsonPath("$[1].url", is(adsVoteitEntity.getUrl())))

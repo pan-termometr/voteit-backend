@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static pl.maciejbadziak.voteitbackend.user.testdata.UserEntityTestData.termometrUserEntity;
 import static pl.maciejbadziak.voteitbackend.user.testdata.UserEntityTestData.testUserEntity;
 
-class UserAssemblerTest {
+class UserInAssemblerTest {
 
     @Test
     void shouldAssemblerUser() {
