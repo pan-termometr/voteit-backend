@@ -20,6 +20,16 @@ public class UserTestData {
     public static User testUser() {
         return User.builder()
                 .username(Username.of("test"))
+                .password("password")
+                .email(Email.of("test@voteit.com"))
+                .registrationDate(RegistrationDate.of(LocalDateTime.of(2022, 11, 11, 13, 13, 13)))
+                .build();
+    }
+
+    public static User testRegisteredUser() {
+        return User.builder()
+                .username(Username.of("test"))
+                .password("encoded password")
                 .email(Email.of("test@voteit.com"))
                 .registrationDate(RegistrationDate.of(LocalDateTime.of(2022, 11, 11, 13, 13, 13)))
                 .build();

@@ -35,7 +35,15 @@ public class UserRestController {
         return userResourceAssembler.assemble(findUserByUsernameUseCase.find(username));
     }
 
-    @PostMapping("/registration")
+    private static void validateUsername(final String username) throws InvalidRequestException {
+        if (isUsernameInvalid(username)) {
+            throw new InvalidRequestException(username);
+        }
+    }
+
+    @PostMapping(
+            path = "/registration"
+    )
     public ResponseEntity<Object> registerUser(@RequestBody @Valid UserResource userResource) {
         try {
             final User user = userInAssembler.assemble(userResource);
@@ -48,14 +56,6 @@ public class UserRestController {
             return ResponseEntity
                     .status(HttpStatus.CONFLICT)
                     .body(e.getMessage());
-        }
-
-
-    }
-
-    private static void validateUsername(final String username) throws InvalidRequestException {
-        if(isUsernameInvalid(username)) {
-            throw new InvalidRequestException(username);
         }
     }
 

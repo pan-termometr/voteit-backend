@@ -21,4 +21,13 @@ public class UserResourceTestData {
                 .registrationDate(LocalDateTime.of(2022, 11, 11, 13, 13, 13))
                 .build();
     }
+
+    public static UserResource testUserToBeRegisteredResource() {
+        return UserResource.builder()
+                .username("test")
+                .password("test-password")
+                .email("test@voteit.com")
+                .registrationDate(null)
+                .build();
+    }
 }

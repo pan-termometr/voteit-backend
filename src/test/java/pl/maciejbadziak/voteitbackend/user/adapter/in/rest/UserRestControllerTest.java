@@ -5,10 +5,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import pl.maciejbadziak.voteitbackend.user.adapter.in.rest.error.InvalidRequestException;
 import pl.maciejbadziak.voteitbackend.user.adapter.in.rest.resources.UserResource;
 import pl.maciejbadziak.voteitbackend.user.domain.User;
 import pl.maciejbadziak.voteitbackend.user.usecase.FindUserByUsernameUseCase;
+import pl.maciejbadziak.voteitbackend.user.usecase.RegisterNewUserUseCase;
+import pl.maciejbadziak.voteitbackend.user.usecase.error.UserAlreadyExistsException;
 
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -26,12 +31,20 @@ class UserRestControllerTest {
     private static final int MAX_LENGTH = 30;
     private static final String INVALID_TOO_LONG_REQUEST = generateTooLongRequest();
     private static final String EXCEPTION_MESSAGE = "Requested user: [%s] is not valid ";
+    private static final String USER_ALREADY_EXISTS_EXCEPTION_MESSAGE = "User with this username (%s) already exists.";
+    private static final String SUCCESSFULLY_REGISTERED_MESSAGE = "Hey %s, you are successfully registered!";
 
     @Mock
     private transient FindUserByUsernameUseCase findUserByUsernameUseCaseMock;
 
     @Mock
     private transient UserResourceAssembler userResourceAssemblerMock;
+
+    @Mock
+    private transient UserInAssembler userInAssemblerMock;
+
+    @Mock
+    private transient RegisterNewUserUseCase registerNewUserUseCaseMock;
 
     @InjectMocks
     private transient UserRestController userRestController;
@@ -82,5 +95,51 @@ class UserRestControllerTest {
         assertThat(result)
                 .isInstanceOf(InvalidRequestException.class)
                 .hasMessage(EXCEPTION_MESSAGE, INVALID_TOO_LONG_REQUEST);
+    }
+
+    @Test
+    void shouldProvideSuccessfulResponseEntityTest() throws UserAlreadyExistsException {
+        // given
+        final UserResource userResource = testUserResource();
+        final User user = testUser();
+
+        when(userInAssemblerMock.assemble(userResource)).thenReturn(user);
+        when(registerNewUserUseCaseMock.register(user)).thenReturn(user);
+        when(userResourceAssemblerMock.assemble(user)).thenReturn(userResource);
+
+        // when
+        final ResponseEntity<Object> response = userRestController.registerUser(userResource);
+
+        // then
+        assertThat(response).extracting(
+                ResponseEntity::getStatusCode,
+                HttpEntity::getBody
+        ).containsExactly(
+                HttpStatus.CREATED,
+                String.format(SUCCESSFULLY_REGISTERED_MESSAGE, user.getUsername().getValue())
+        );
+    }
+
+    @Test
+    void shouldProvideConflictResponseEntityForUserAlreadyExistsExceptionTest() throws UserAlreadyExistsException {
+        // given
+        final UserResource userResource = testUserResource();
+        final User user = testUser();
+        final String exceptionMessage = String.format(USER_ALREADY_EXISTS_EXCEPTION_MESSAGE, userResource.getUsername());
+
+        when(userInAssemblerMock.assemble(userResource)).thenReturn(user);
+        when(registerNewUserUseCaseMock.register(user)).thenThrow(new UserAlreadyExistsException(exceptionMessage));
+
+        // when
+        final ResponseEntity<Object> response = userRestController.registerUser(userResource);
+
+        // then
+        assertThat(response).extracting(
+                ResponseEntity::getStatusCode,
+                HttpEntity::getBody
+        ).containsExactly(
+                HttpStatus.CONFLICT,
+                exceptionMessage
+        );
     }
 }

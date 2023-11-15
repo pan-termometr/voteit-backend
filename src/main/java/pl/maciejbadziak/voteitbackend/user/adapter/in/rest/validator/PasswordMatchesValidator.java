@@ -9,11 +9,15 @@ public class PasswordMatchesValidator
 
     @Override
     public void initialize(PasswordMatches constraintAnnotation) {
+        // implementation not needed
     }
 
     @Override
     public boolean isValid(Object obj, ConstraintValidatorContext context){
-        User user = (User) obj;
+        final User user = (User) obj;
+        if (user.getPassword() == null || user.getMatchingPassword() == null) {
+            return false;
+        }
         return user.getPassword().equals(user.getMatchingPassword());
     }
 }
